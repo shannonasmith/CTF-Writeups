@@ -1,4 +1,3 @@
-
 <div align="center">
 
 # 🏁 WiCyS / SANS Beginner-Level CTF  
@@ -43,13 +42,15 @@ No flags or protected competition answers are included.
 
 ---
 
-# 🧩 Completed Challenge Categories
+# 🧩 Documented Challenges
 
 ---
 
 ## 🔐 Encoding & Data Transformation
 
-### **ce01 — Encoding, Not Encryption**
+### **ce01 — Encoding, Not Encryption**  
+🔎 [View Writeup](./ce01-encoding-not-encryption)
+
 - Classification of encoding type after failed initial decoding attempts  
 - Pivot from common encodings to octal representation  
 - Reinforced methodology: misclassification vs. execution failure  
@@ -58,22 +59,34 @@ No flags or protected competition answers are included.
 
 ## 🌐 Web Application Security
 
-### **we01 — Hidden Web Content**
+### **we01 — Hidden Web Content**  
+🔎 [View Writeup](./we01-hidden-web-content)
+
 - Source inspection & enumeration mindset  
 - Discovery of unlinked resources  
 - Manual exploration informed by research  
 
-### **wm01 — Arrays in JavaScript**
+### **wm01 — Arrays in JavaScript**  
+🔎 [View Writeup](./wm01-arrays-in-javascript)
+
 - Client-side logic inspection  
 - Manipulation of front-end validation mechanisms  
 - Demonstration of weak client-side trust model  
 
-### **Get Admin**
+### **we02 — Get Admin**  
+🔎 [View Writeup](./we02-get-admin)
+
 - Session & cookie inspection  
 - Client-side privilege escalation  
 - Weak authorization model analysis  
 
-### **race-my-robot**
+---
+
+## 🐍 Code Review
+
+### **cr01 — Race My Robot**  
+🔎 [View Writeup](./cr01-race-my-robot)
+
 - Static Python source review  
 - Logic flaw identification  
 - Controlled exploitation via code understanding  
@@ -82,42 +95,32 @@ No flags or protected competition answers are included.
 
 ## 📄 Digital Forensics & Artifact Recovery
 
-### **Redacted 1 — ODT Document Analysis**
+### **df01 — Redacted Artifacts**  
+🔎 [View Writeup](./df01-redacted-artifacts)
+
 - Recovery of text not properly removed from document structure  
-
-### **Redacted 2 — Image Transparency Analysis**
-- Identification of concealed content via alpha channel behavior  
-
-### **Redacted 3 — PDF Redaction Reversal**
-- Removal of overlay-based redactions  
-- Verification of underlying content persistence  
-
-### **Redacted 4 — Embedded Diagram Metadata (.drawio.png)**
-- Recognition of structured file format  
-- Extraction of hidden diagram-layer content  
+- Identification of concealed content in layered artifacts  
+- Detection of improper redaction techniques across file formats  
 
 ---
 
 ## 🪟 Windows Incident Investigation
 
-### **Unwanted Visitor 1**
+### **df02 — Unwanted Visitor**  
+🔎 [View Writeup](./df02-unwanted-visitor)
+
 - Security.evtx analysis  
 - Event ID 4624 logon validation  
 - Host attribution from successful authentication events  
-
-### **Unwanted Visitor 2**
 - PowerShell Script Block Logging review  
-- Detection of `Invoke-Expression (IEX)` usage  
-- Scheduled task persistence mechanism identification  
-
-### **Unwanted Visitor 3**
-- Obfuscation analysis (ROT13)  
-- Script block logic & comment inspection  
-- Hidden account recovery methodology  
+- Detection of suspicious command execution & persistence  
 
 ---
 
-## 📡 Multi-Artifact Forensic Series — “New House”
+## 📡 Multi-Artifact Forensic Series
+
+### **df03 — New House Investigation**  
+🔎 [View Writeup](./df03-new-house-investigation)
 
 Artifacts analyzed:
 
