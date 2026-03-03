@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🔑 Get Admin  
+# 🔑 we02 — Get Admin  
 ## Authentication Logic Analysis & Session Manipulation
 
 ![Category](https://img.shields.io/badge/Category-Web%20Security-green?style=for-the-badge)
