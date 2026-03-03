@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🤖 cr01 - Race My Robot  
+# 🤖 cr01 — Race My Robot  
 ## Static Code Analysis & Application Logic Review
 
 ![Category](https://img.shields.io/badge/Category-Code%20Analysis-purple?style=for-the-badge)
