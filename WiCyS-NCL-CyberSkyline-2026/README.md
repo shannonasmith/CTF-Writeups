@@ -1,4 +1,8 @@
 <div align="center">
+
+<div align="center">
+  <img src="assets/ncl_powered_by.svg" width="420"/>
+</div>
   
 # 🚀 NCL CyberSkyline @ WiCyS 2026  
 ## 🔥 Multi-Domain Offensive & Defensive Security Competition
