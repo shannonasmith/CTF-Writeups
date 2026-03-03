@@ -1,143 +1,99 @@
-# WiCyS / SANS Beginner-Level CTF  
-## Structured Challenge Analysis & Methodology Portfolio
+<div align="center">
 
-This event marked the beginning of my structured CTF documentation process.
+# 🧪 WiCyS Tier 2 TryHackMe CTF  
+## 🧠 Advanced Scenario Analysis & Applied Security Techniques
 
-Rather than focusing only on flag submission, the goal of this event was to:
+![Event](https://img.shields.io/badge/Event-WiCyS%20Tier%202-6A0DAD?style=for-the-badge)
+![Platform](https://img.shields.io/badge/Platform-TryHackMe-red?style=for-the-badge)
+![Focus](https://img.shields.io/badge/Focus-Offensive%20%7C%20Detection%20%7C%20Analysis-blue?style=for-the-badge)
 
-- Develop repeatable investigative workflows
-- Practice disciplined pivoting under uncertainty
-- Strengthen log and artifact analysis techniques
-- Improve documentation under time constraints
-- Identify areas for deeper follow-up research
-
-All writeups focus on **methodology and technical reasoning only**.  
-No flags or protected competition answers are included.
+</div>
 
 ---
 
-## Technical Domains Covered
+## 🎯 Objective
 
-- Encoding & Data Transformation
-- Web Enumeration & Information Disclosure
-- Client-Side JavaScript Logic Analysis
-- Document & Image Forensics
-- Windows Event Log Analysis
-- PowerShell Script Block Logging
-- Scheduled Task Persistence
-- Network Packet Capture (PCAP) Review
-- HTTP User-Agent & Artifact Attribution
-- Authentication & Session Manipulation
-- Static Code Auditing
+This Tier 2 event expanded beyond foundational CTF skills into structured scenario-based exploitation and detection workflows.
 
----
+Primary focus areas included:
 
-## Completed Challenge Categories
+- 🧭 Enumeration strategy refinement  
+- 🔍 Privilege escalation logic  
+- 🪟 Windows & Linux artifact interpretation  
+- 📡 Network-based pivoting  
+- ⚙️ Tool-assisted exploitation with disciplined reasoning  
 
-### Encoding & Data Transformation
-- **ce01 — Encoding, not encryption**
-  - Identifying uncommon encoding after failed decoding attempts
-  - Pivot from common encodings to octal representation
+All documentation emphasizes analytical process and structured methodology.  
+No flags or protected answers are included.
 
 ---
 
-### Web Application Security
-- **we01 — Hidden Web Content**
-  - Source inspection & enumeration mindset
-  - Discovery of unlinked resources
+# 🛠 Technical Domains Covered
 
-- **wm01 — Arrays in JavaScript**
-  - Client-side logic analysis
-  - Manipulation of front-end validation conditions
-
-- **Get Admin**
-  - Session/cookie manipulation
-  - Weak client-side authorization model
-
-- **race-my-robot**
-  - Static Python code review
-  - Logic flaw identification & exploitation
+| Domain | Focus Area |
+|--------|------------|
+| 🌐 Network Enumeration | Service discovery & host profiling |
+| 🐧 Linux Exploitation | Privilege escalation & misconfiguration abuse |
+| 🪟 Windows Investigation | Log review & persistence analysis |
+| 📡 Network Traffic | Packet inspection & lateral movement clues |
+| 🧰 Offensive Tooling | Nmap, enumeration scripts, manual analysis |
+| 🔐 Credential Analysis | Access validation & privilege mapping |
 
 ---
 
-### Digital Forensics & Artifact Recovery
-
-- **Redacted 1 — ODT Document Analysis**
-  - Recovering text not properly removed from documents
-
-- **Redacted 2 — Image Transparency**
-  - Identifying concealed content via alpha channel behavior
-
-- **Redacted 3 — PDF Redaction Reversal**
-  - Removing overlay-based redactions
-
-- **Redacted 4 — Embedded Diagram Metadata**
-  - Extracting hidden content from `.drawio.png` structured files
+# 🧩 Challenge Focus Areas
 
 ---
 
-### Windows Incident Investigation
+## 🌐 Enumeration & Reconnaissance
 
-- **Unwanted Visitor 1**
-  - Security.evtx analysis
-  - Event ID 4624 logon validation
-  - Host attribution from successful authentication events
-
-- **Unwanted Visitor 2**
-  - PowerShell Script Block Logging review
-  - Detection of `Invoke-Expression (IEX)` usage
-  - Scheduled task persistence mechanism identification
-
-- **Unwanted Visitor 3**
-  - Obfuscation analysis (ROT13)
-  - Script block comment and logic inspection
-  - Hidden account recovery
+- Service discovery and port scanning discipline  
+- Identification of exposed services  
+- Hypothesis-driven exploitation sequencing  
 
 ---
 
-### Multi-Artifact Forensic Series — “New House”
+## 🐧 Linux Privilege Escalation
 
-Artifacts analyzed:
-- Windows logs
-- Linux indicators
-- Network capture (PCAP)
-- Document artifacts
-
-Completed investigative areas:
-- Windows group creation & membership analysis
-- Scheduled task removal & creation tracking
-- Linux OS identification
-- Tool download identification via HTTP traffic
-- Browser attribution via User-Agent analysis
-
-Remaining research areas were intentionally preserved for later deep-dive expansion.
+- Sudo misconfiguration review  
+- Scheduled task and cron persistence inspection  
+- File permission and binary abuse analysis  
 
 ---
 
-## Challenges Retained for Future Deep Dive
+## 🪟 Windows Investigation
 
-- Directory Traversal exploitation scenario
-- Advanced PCAP port state comparison
-- Additional artifact attribution questions from the New House series
-
-These items are retained to:
-- Revisit with stronger enumeration workflows
-- Practice alternate traversal bypass techniques
-- Perform structured PCAP timeline reconstruction
+- Authentication event review  
+- Scheduled task tracking  
+- Persistence mechanism identification  
 
 ---
 
-## Key Takeaways From This Event
+## 📡 Network Behavior Analysis
 
-- Failure often signals incorrect classification, not incorrect execution
-- Event ID interpretation is critical in Windows investigations
-- Script Block Logging provides high-fidelity attacker intent
-- Client-side logic must never be trusted for authorization
-- File format research frequently reveals hidden data
-- Structured documentation significantly improves retention and analysis quality
+- PCAP review for suspicious flows  
+- HTTP artifact extraction  
+- User-Agent and host attribution  
 
 ---
 
-**Author:** Shannon “Shae” Smith  
+# 🧠 Key Takeaways
+
+- Structured enumeration reduces wasted effort  
+- Privilege escalation often stems from simple misconfigurations  
+- Logs provide behavioral truth beyond surface symptoms  
+- Analytical discipline improves efficiency under time pressure  
+
+---
+
+<div align="center">
+
+## 👤 Shannon “Shae” Smith  
 Cybersecurity | DFIR • Web • Detection Engineering  
-U.S. Navy Veteran | Virginia Tech MIT ’23
+U.S. Navy Veteran | Virginia Tech — M.S. Information Technology  
+
+🧠 Analytical Precision  
+🛡️ Defensive Mindset  
+🔍 Offensive Awareness  
+
+</div>
