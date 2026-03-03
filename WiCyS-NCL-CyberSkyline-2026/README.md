@@ -1,7 +1,9 @@
 <div align="center">
-
+  
 # 🚀 NCL CyberSkyline @ WiCyS 2026  
 ## 🔥 Multi-Domain Offensive & Defensive Security Competition
+
+</div>
 
 ![Event](https://img.shields.io/badge/Event-NCL%20CyberSkyline%202026-6A0DAD?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/Platform-Cyber%20Skyline-black?style=for-the-badge)
