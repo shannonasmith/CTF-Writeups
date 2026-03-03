@@ -1,20 +1,28 @@
-# ce01 — Encoding, Not Encryption  
-**Category:** Warm-up / Encoding  
-**Focus:** Artifact Classification & Data Transformation Methodology  
+
+<div align="center">
+
+# 🔐 ce01 — Encoding, Not Encryption  
+## Data Classification & Transformation Analysis
+
+![Category](https://img.shields.io/badge/Category-Encoding-yellow?style=for-the-badge)
+![Focus](https://img.shields.io/badge/Focus-Artifact%20Classification-blue?style=for-the-badge)
+![Method](https://img.shields.io/badge/Method-Structured%20Pivot-success?style=for-the-badge)
+
+</div>
 
 ---
 
-## Challenge Overview
+## 🎯 Objective
 
-This challenge required downloading a ZIP archive and determining the hidden value contained within the extracted file.
+Download and analyze a provided artifact to determine the hidden value contained within it.
 
-The title emphasized **encoding rather than encryption**, indicating that the solution involved identifying and reversing a data transformation rather than breaking cryptography.
+The challenge title emphasized **encoding rather than encryption**, signaling that the solution required identifying and reversing a data transformation — not breaking cryptography.
 
-The primary objective was correct **classification of encoding type**.
+This was fundamentally a **classification problem**.
 
 ---
 
-## Environment
+## 🖥 Environment
 
 - Ubuntu Virtual Machine  
 - Terminal tools (`wget`, `unzip`, `ls`)  
@@ -23,21 +31,21 @@ The primary objective was correct **classification of encoding type**.
 
 ---
 
-## Step 1 — Download the Artifact
+## 📦 Step 1 — Acquire the Artifact
 
-The provided archive was downloaded via terminal:
+Downloaded the archive via terminal:
 
 ```bash
 wget https://2-files.bootupctf.net/ce01.zip
 ```
 
-The successful transfer confirmed that the challenge artifact was retrieved correctly.
+Successful retrieval confirmed that the artifact was intact and ready for inspection.
 
 ---
 
-## Step 2 — Extract and Inspect Contents
+## 🔍 Step 2 — Extract & Inspect
 
-The archive was extracted and inspected:
+Extracted and reviewed the contents:
 
 ```bash
 unzip ce01.zip -d ce01
@@ -47,84 +55,94 @@ ls -l
 
 The extracted file contained content that was not immediately human-readable.
 
-At this stage, the working assumption was that the content was encoded.
+Initial hypothesis:
+The data was encoded using a standard transformation method.
 
 ---
 
-## Step 3 — Initial Classification Attempts
+## 🧪 Step 3 — Initial Classification Attempts
 
-The first approach was to test common encoding schemes:
+Tested common encoding formats:
 
-- Base64 decoding  
-- Hexadecimal conversion  
-- Binary-to-text transformation  
-- Common substitution patterns  
+- Base64  
+- Hexadecimal  
+- Binary-to-text  
+- Simple substitution patterns  
 
-These attempts did **not** produce meaningful output.
+None produced meaningful output.
 
-### Analytical Insight
+### 🔎 Analytical Observation
 
 Repeated failure suggested:
 
-- The execution was correct  
-- The classification of encoding type was incorrect  
+- The decoding tools were functioning correctly  
+- The encoding classification was likely incorrect  
 
-This indicated the need to pivot rather than continue repeating common decoding attempts.
+This signaled the need to pivot rather than repeat the same decoding attempts.
 
 ---
 
-## Step 4 — Strategic Pivot
+## 🔄 Step 4 — Strategic Pivot
 
-Instead of continuing with common encoding formats, the investigation shifted to:
+Shifted investigation toward:
 
-- Less frequently used numeric encodings  
+- Less common numeric encodings  
 - Alternate base representations  
-- Encoding families beyond Base64/hex  
+- Broader encoding families beyond Base64/hex  
 
-This pivot was driven by the principle:
+Guiding principle:
 
-> Persistent decoding failure often indicates incorrect encoding classification, not tool error.
-
----
-
-## Step 5 — Identify Octal Encoding
-
-Further inspection revealed the data followed a pattern consistent with **octal representation**.
-
-Converting the values from octal to text produced a readable output, confirming the correct encoding classification.
+> Persistent decoding failure often indicates incorrect encoding classification, not tool misuse.
 
 ---
 
-## Methodology Summary
+## 🔢 Step 5 — Identify Octal Representation
+
+Closer inspection revealed patterns consistent with **octal encoding**.
+
+Applying an octal-to-text transformation produced readable output, confirming the correct classification.
+
+---
+
+# 🧠 Methodology Framework Applied
 
 1. Acquire artifact  
 2. Extract and inspect  
-3. Attempt common decoding formats  
+3. Test common encoding families  
 4. Recognize repeated failure pattern  
-5. Reclassify encoding family  
-6. Apply octal-to-text transformation  
+5. Reclassify encoding strategy  
+6. Apply alternate numeric base transformation  
 7. Validate readable output  
 
 ---
 
-## Key Lessons Learned
+# 🛡 Defensive Insight
 
-- Encoding challenges are classification problems first, transformation problems second.  
-- Over-reliance on common formats (Base64/hex) can delay resolution.  
-- Pivoting strategy is more important than memorizing tools.  
-- Research is a valid investigative technique.  
-- Structured workflow reduces frustration under time pressure.  
+Encoding misclassification is common in early-stage investigations.
+
+This challenge reinforced:
+
+- Encoding ≠ encryption  
+- Data classification must precede transformation  
+- Tool repetition without pivoting wastes time  
+- Research-backed pivots accelerate resolution  
 
 ---
 
-## Skills Reinforced
+# 💡 Skills Reinforced
 
 - Terminal-based artifact handling  
 - Encoding pattern recognition  
 - Analytical pivoting  
-- Methodical troubleshooting  
-- Problem classification under ambiguity  
+- Systematic troubleshooting  
+- Classification under ambiguity  
 
 ---
 
-*This writeup intentionally omits the final challenge value to respect competition guidelines.*
+<div align="center">
+
+🔐 Classify before decoding  
+🔄 Pivot when patterns fail  
+🧠 Think in families, not formats  
+
+</div>
