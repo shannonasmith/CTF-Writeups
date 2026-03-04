@@ -11,7 +11,7 @@
 
 ---
 
-# 🎯 Objective
+## 🎯 Objective
 
 Analyze how simulated adversary groups establish the infrastructure and resources required to support their attacks.
 
@@ -21,7 +21,7 @@ Understanding this phase helps defenders identify attacker preparation activity 
 
 ---
 
-# 🖥 Investigation Context
+## 🖥 Investigation Context
 
 Within the SkillsQuest scenario, multiple simulated threat actors demonstrated different approaches to preparing attack infrastructure.
 
@@ -37,7 +37,7 @@ Each group used distinct methods to establish resources needed for later stages 
 
 ---
 
-# 🔍 Observed Resource Development Techniques
+## 🔍 Observed Resource Development Techniques
 
 | Technique | Description |
 |------|------|
@@ -50,7 +50,7 @@ These preparations allow attackers to operate indirectly and maintain operationa
 
 ---
 
-# 🧠 MITRE ATT&CK Mapping
+## 🧠 MITRE ATT&CK Mapping
 
 | Technique | ID |
 |------|------|
@@ -60,7 +60,7 @@ These preparations allow attackers to operate indirectly and maintain operationa
 
 ---
 
-# 🛡 Defensive Insight
+## 🛡 Defensive Insight
 
 Resource development activities frequently occur **outside the target environment**, making detection difficult.
 
@@ -74,7 +74,7 @@ Threat intelligence monitoring can help organizations detect attacker infrastruc
 
 ---
 
-# 💡 Skills Reinforced
+## 💡 Skills Reinforced
 
 - Threat actor lifecycle analysis  
 - Infrastructure staging recognition  
