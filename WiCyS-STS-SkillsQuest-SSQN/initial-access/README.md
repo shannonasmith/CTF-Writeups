@@ -11,7 +11,7 @@
 
 ---
 
-# 🎯 Objective
+## 🎯 Objective
 
 Identify how simulated threat actors obtained their **initial foothold** within the target environment.
 
@@ -21,7 +21,7 @@ Understanding this phase is critical because it marks the beginning of an active
 
 ---
 
-# 🖥 Investigation Context
+## 🖥 Investigation Context
 
 Within the SkillsQuest investigation scenario, multiple adversary groups demonstrated different methods of gaining access to victim systems.
 
@@ -37,7 +37,7 @@ Each actor leveraged different techniques depending on their operational goals a
 
 ---
 
-# 🔍 Observed Initial Access Techniques
+## 🔍 Observed Initial Access Techniques
 
 | Technique | Description |
 |------|------|
@@ -50,7 +50,7 @@ These techniques allowed attackers to bypass traditional perimeter defenses.
 
 ---
 
-# 🧠 MITRE ATT&CK Mapping
+## 🧠 MITRE ATT&CK Mapping
 
 | Technique | ID |
 |------|------|
@@ -61,7 +61,7 @@ These techniques allowed attackers to bypass traditional perimeter defenses.
 
 ---
 
-# 🛡 Defensive Insight
+## 🛡 Defensive Insight
 
 Initial access techniques frequently rely on **human error or credential compromise**.
 
@@ -76,7 +76,7 @@ Preventing or detecting this phase can stop attacks before attackers begin execu
 
 ---
 
-# 💡 Skills Reinforced
+## 💡 Skills Reinforced
 
 - Attack lifecycle analysis  
 - Authentication anomaly detection concepts  
