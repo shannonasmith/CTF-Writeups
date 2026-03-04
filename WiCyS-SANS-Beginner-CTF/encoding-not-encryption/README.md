@@ -11,7 +11,7 @@
 
 ---
 
-## 🎯 Objective
+### 🎯 Objective
 
 Download and analyze a provided artifact to determine the hidden value contained within it.
 
@@ -21,7 +21,7 @@ This was fundamentally a **classification problem**.
 
 ---
 
-## 🖥 Environment
+### 🖥 Environment
 
 | Tool | Purpose |
 |-----|------|
@@ -32,7 +32,7 @@ This was fundamentally a **classification problem**.
 
 ---
 
-## 📦 Step 1 — Acquire the Artifact
+### 📦 Step 1 — Acquire the Artifact
 
 The challenge provided a downloadable ZIP archive containing the encoded artifact.
 
@@ -61,7 +61,7 @@ Successful retrieval confirmed that the artifact was intact and ready for inspec
 
 ---
 
-## 🔍 Step 2 — Extract & Inspect
+### 🔍 Step 2 — Extract & Inspect
 
 The archive was extracted and the contents inspected.
 
@@ -103,7 +103,7 @@ The values likely represented **encoded ASCII text** rather than encrypted data.
 
 ---
 
-## 🧪 Step 3 — Initial Classification Attempts
+### 🧪 Step 3 — Initial Classification Attempts
 
 Common encoding formats were tested first.
 
@@ -117,13 +117,13 @@ Result: ❌ Invalid format.
 
 Hex decoding also failed to produce meaningful output.
 
-### Binary
+#### Binary
 
 Binary decoding attempts did not match the numeric structure of the data.
 
 ---
 
-### 🔎 Analytical Observation
+#### 🔎 Analytical Observation
 
 Repeated decoding failures suggested:
 
@@ -134,7 +134,7 @@ At this point the investigation pivoted toward **pattern analysis of the numeric
 
 ---
 
-## 🔄 Step 4 — Strategic Pivot
+### 🔄 Step 4 — Strategic Pivot
 
 Instead of continuing to retry common encoding methods, the investigation shifted toward identifying **numeric base patterns**.
 
@@ -158,7 +158,7 @@ Guiding principle:
 
 ---
 
-## 🔢 Step 5 — Identify Octal Representation
+### 🔢 Step 5 — Identify Octal Representation
 
 The numeric values were interpreted as **octal ASCII codes**.
 
@@ -176,7 +176,7 @@ The decoded output produced readable text, confirming the correct encoding class
 
 ---
 
-# 🧠 Methodology Framework Applied
+## 🧠 Methodology Framework Applied
 
 ```
 Artifact acquisition
@@ -196,7 +196,7 @@ Successful decoding
 
 ---
 
-# 🛠 Commands Used
+## 🛠 Commands Used
 
 ```bash
 wget https://2-files.bootupctf.net/ce01.zip
@@ -212,7 +212,7 @@ Primary analysis tool:
 
 ---
 
-# 🛡 Defensive Insight
+## 🛡 Defensive Insight
 
 Encoding misclassification is common in early-stage investigations.
 
@@ -227,7 +227,7 @@ Recognizing numeric patterns and base representations can significantly reduce i
 
 ---
 
-# 💡 Skills Reinforced
+## 💡 Skills Reinforced
 
 - Terminal-based artifact handling  
 - Encoding pattern recognition  
