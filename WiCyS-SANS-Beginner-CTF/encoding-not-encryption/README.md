@@ -55,7 +55,7 @@ Saving to: 'ce01.zip'
 
 📸 **Artifact Download**
 
-![Artifact Download](images/image01.png)
+<img src="../images/image01.png" width="800">
 
 Successful retrieval confirmed that the artifact was intact and ready for inspection.
 
@@ -79,7 +79,7 @@ encoded.txt
 
 📸 **Extracted File Structure**
 
-![Extracted Files](images/image02.png)
+<img src="../images/image02.png" width="800">
 
 Opening the file revealed a sequence of numeric values that were not immediately human-readable.
 
@@ -95,7 +95,7 @@ Example data excerpt:
 
 📸 **Encoded Artifact**
 
-![Encoded Data](images/image03.png)
+<img src="../images/image03.png" width="800">
 
 Initial hypothesis:
 
@@ -170,7 +170,7 @@ From Octal → Text
 
 📸 **CyberChef Transformation**
 
-![CyberChef Decode](images/image04.png)
+<img src="../images/image04.png" width="800">
 
 The decoded output produced readable text, confirming the correct encoding classification.
 
