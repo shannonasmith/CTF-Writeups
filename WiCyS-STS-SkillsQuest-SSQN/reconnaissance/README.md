@@ -11,7 +11,7 @@
 
 ---
 
-# 🎯 Objective
+## 🎯 Objective
 
 Identify how different simulated threat actors conduct **reconnaissance activities** before launching attacks.
 
@@ -26,7 +26,7 @@ Understanding these behaviors allows defenders to detect **early indicators of c
 
 ---
 
-# 🖥 Investigation Context
+## 🖥 Investigation Context
 
 The SkillsQuest scenario provided several simulated adversary groups whose behaviors had to be compared and classified.
 
@@ -42,7 +42,7 @@ Each group demonstrated different reconnaissance techniques.
 
 ---
 
-# 🔍 Observed Reconnaissance Techniques
+## 🔍 Observed Reconnaissance Techniques
 
 | Technique | Description |
 |------|------|
@@ -55,7 +55,7 @@ These activities align with early-stage intrusion behavior.
 
 ---
 
-# 🧠 MITRE ATT&CK Mapping
+## 🧠 MITRE ATT&CK Mapping
 
 | Technique | ID |
 |------|------|
@@ -65,7 +65,7 @@ These activities align with early-stage intrusion behavior.
 
 ---
 
-# 🛡 Defensive Insight
+## 🛡 Defensive Insight
 
 Reconnaissance activity often appears **benign at first**, making detection difficult.
 
@@ -81,7 +81,7 @@ Detecting this stage provides defenders with an opportunity to disrupt attacks *
 
 ---
 
-# 💡 Skills Reinforced
+## 💡 Skills Reinforced
 
 - Threat actor behavioral analysis  
 - MITRE ATT&CK technique mapping  
