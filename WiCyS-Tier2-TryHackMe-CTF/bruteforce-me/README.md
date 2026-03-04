@@ -1,8 +1,24 @@
-# Bruteforce Me
+<div align="center">
 
-## Challenge Overview
+# 🔐 Bruteforce Me  
+## Authentication Weakness & Credential Attack Analysis
 
-This challenge presents a login portal where the user has forgotten their credentials. The challenge description suggests the username may be one of the following:
+![Category](https://img.shields.io/badge/Category-Web%20Exploitation-orange?style=for-the-badge)
+![Focus](https://img.shields.io/badge/Focus-Credential%20Bruteforce-blue?style=for-the-badge)
+![Method](https://img.shields.io/badge/Method-Automated%20Enumeration-success?style=for-the-badge)
+![Tool](https://img.shields.io/badge/Tool-Hydra%20(Kali%20Linux)-black?style=for-the-badge&logo=kalilinux)
+
+<img src="https://www.kali.org/tools/hydra/images/hydra-logo.svg" width="120"/>
+
+</div>
+
+---
+
+## 🎯 Objective
+
+Access a protected login portal by identifying valid credentials.
+
+The challenge description suggested the possible usernames:
 
 ```
 pedro
@@ -10,57 +26,55 @@ admin
 root
 ```
 
-The objective is to discover valid login credentials and retrieve the flag.
+The goal was to determine the correct password and retrieve the flag.
 
-This exercise demonstrates the risks associated with weak authentication controls and the importance of rate limiting and credential protection.
-
----
-
-## Environment
-
-Attack platform:
-
-```
-TryHackMe AttackBox
-```
-
-Target:
-
-```
-Web login service running on the target machine
-```
-
-Primary tools used:
-
-```
-hydra
-curl
-browser developer tools
-```
+This challenge demonstrates the risks associated with **weak authentication controls and password reuse**.
 
 ---
 
-## Initial Enumeration
+## 🖥 Environment
 
-After the machine started, the first step was to identify how authentication was handled.
-
-Opening the login page revealed a standard form with username and password fields.
-
-Before attempting brute force attacks, it is important to determine:
-
-- login endpoint  
-- request method  
-- failure message  
-
-Using browser developer tools confirmed the form submission used an HTTP POST request.
+- TryHackMe AttackBox  
+- Kali Linux tooling  
+- Web browser  
+- Hydra password brute-force tool  
+- RockYou password list  
 
 ---
 
-## Credential Brute Force
+## 🔍 Step 1 — Initial Reconnaissance
 
-Because the challenge hints provided possible usernames, the attack focused on brute forcing the password.
+After launching the target machine, the login page was inspected through a browser.
 
-Hydra was used with the **rockyou password list**.
+Observations:
+
+- Standard username/password form
+- Login request sent via **HTTP POST**
+- Authentication error message returned when credentials failed
+
+Understanding the **request structure** was necessary before attempting automated attacks.
+
+---
+
+## 🧪 Step 2 — Identify Attack Strategy
+
+Because the challenge hinted at possible usernames, the attack focused on **password discovery rather than username enumeration**.
+
+Brute forcing was selected as the most efficient approach.
+
+Primary tool used:
+
+```
+Hydra
+```
+
+Hydra is a widely used credential attack tool included in **Kali Linux**.
+
+---
+
+## ⚙ Step 3 — Execute Credential Brute Force
+
+Using the RockYou password list, Hydra was configured to test passwords against the login form.
 
 Example command:
 
@@ -69,78 +83,80 @@ hydra -l pedro -P /usr/share/wordlists/rockyou.txt <TARGET_IP> http-post-form \
 "/login:username=^USER^&password=^PASS^:F=incorrect"
 ```
 
-Explanation:
+### Command Breakdown
 
 ```
 -l pedro
-specific username
+Specified username
 
 -P rockyou.txt
-password dictionary
+Password dictionary
 
 http-post-form
-brute forcing a web login form
+Indicates the target is a web login form
 
 F=incorrect
-string returned when login fails
+Failure condition returned by the application
 ```
 
-Hydra iterated through the password list until valid credentials were identified.
+Hydra iterated through the password list until valid credentials were discovered.
 
 ---
 
-## Successful Login
+## 🔓 Step 4 — Successful Authentication
 
-Once the correct credentials were discovered, authentication succeeded and access to the application was granted.
+Once the correct credentials were identified, authentication succeeded and the application granted access to the protected area.
 
-After logging in, the application displayed the challenge flag.
+The challenge flag was then visible within the authenticated page.
 
 ```
 THM{REDACTED}
 ```
 
-*(Flags are redacted in this repository to avoid spoilers.)*
+*(Flags are intentionally redacted in this repository to avoid spoilers.)*
 
 ---
 
-## Key Concepts Demonstrated
+# 🧠 Methodology Framework Applied
 
-Credential brute forcing relies on testing large numbers of passwords against an authentication interface.
-
-This challenge highlights several common security weaknesses:
-
-- weak passwords  
-- lack of login attempt limits  
-- missing account lockout protections  
-
-Without these protections, automated tools can compromise accounts quickly.
+1. Identify authentication interface  
+2. Inspect login request behavior  
+3. Determine attack feasibility  
+4. Select brute-force strategy  
+5. Automate password testing  
+6. Validate successful authentication  
 
 ---
 
-## Security Lessons
+# 🛡 Defensive Insight
 
-Organizations should implement protections against brute force attacks, including:
+Brute-force attacks remain one of the most common authentication threats.
 
-- account lockout after repeated failures  
-- CAPTCHA protections  
+This challenge reinforces the importance of implementing protective controls such as:
+
+- login rate limiting  
+- account lockout policies  
 - multi-factor authentication  
-- monitoring for abnormal login attempts  
-- strong password policies  
+- password complexity requirements  
 
-These measures significantly reduce the risk of automated credential attacks.
+Without these protections, automated credential attacks can compromise accounts quickly.
 
 ---
 
-## Skills Demonstrated
+# 💡 Skills Reinforced
 
 - Web authentication analysis  
-- Password brute forcing  
-- Hydra usage  
-- Understanding login request structure  
+- Credential brute-force methodology  
+- Hydra tool usage  
+- Login request inspection  
 - Security control awareness  
 
 ---
 
-## Next Challenge
+<div align="center">
 
-➡️ **Endpoint**
+🔐 Protect authentication endpoints  
+⚙ Automate repetitive testing  
+🧠 Validate assumptions with evidence  
+
+</div>
