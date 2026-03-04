@@ -29,6 +29,12 @@ Instead, it demonstrates:
 - Documentation of both success and failure paths  
 - Technical reasoning under time constraints  
 
+📊 **Portfolio Scope**
+
+- 25+ CTF challenges documented  
+- Multiple cybersecurity domains practiced  
+- Investigation-first documentation approach  
+
 ---
 
 ## 🔒 Flag & Content Policy
@@ -43,19 +49,38 @@ Writeups focus strictly on **process, analysis, and technique**.
 
 ---
 
-## 🛠 Tools & Technologies Used
+## 🧠 Security Skills Map
 
-<div align="center">
-
-![Linux](https://img.shields.io/badge/Linux-Terminal-black?logo=linux)
-![CyberChef](https://img.shields.io/badge/CyberChef-Data%20Transformation-yellow)
-![Wireshark](https://img.shields.io/badge/Wireshark-PCAP%20Analysis-blue?logo=wireshark)
-![PowerShell](https://img.shields.io/badge/PowerShell-Script%20Logging-blue?logo=powershell)
-![Windows](https://img.shields.io/badge/Windows-Event%20Logs-0078D6?logo=windows)
-![Python](https://img.shields.io/badge/Python-Static%20Code%20Review-blue?logo=python)
-![Draw.io](https://img.shields.io/badge/Draw.io-File%20Inspection-orange)
+| Domain | Tools & Techniques |
+|------|------|
+| 🔐 **Offensive Security** | <img src="https://img.icons8.com/color/48/kali-linux.png" width="25"/> Kali Linux • <img src="https://www.kali.org/tools/hydra/images/hydra-logo.svg" width="25"/> Hydra • password attack methodology |
+| 🌐 **Web Security** | authentication bypass • client-side logic flaws • session manipulation |
+| 📡 **Network Analysis** | <img src="https://www.kali.org/tools/wireshark/images/wireshark-logo.svg" width="25"/> Wireshark • PCAP traffic investigation |
+| 🪟 **DFIR / Log Analysis** | <img src="https://img.icons8.com/color/48/windows-10.png" width="25"/> Windows Event Logs • PowerShell Script Block Logging |
+| 🔎 **Artifact Forensics** | document inspection • redaction bypass • file metadata analysis |
+| 🔑 **Cryptography** | classical cipher analysis • encoding classification |
+| 🐍 **Code Review** | <img src="https://img.icons8.com/color/48/python.png" width="25"/> Python static analysis • logic flaw identification |
+| 🌍 **OSINT** | historical website investigation • public artifact research |
 
 </div>
+
+---
+
+## 🧭 MITRE ATT&CK Techniques Practiced
+
+The investigative techniques demonstrated throughout these writeups align with common adversary behaviors and defensive analysis patterns.
+
+| MITRE Technique | Description |
+|------|------|
+| **T1083 — File and Directory Discovery** | locating artifacts during system investigation |
+| **T1005 — Data from Local System** | extracting information from documents, images, and local artifacts |
+| **T1078 — Valid Accounts** | authentication and credential usage scenarios |
+| **T1110 — Brute Force** | password attack methodology and analysis |
+| **T1059 — Command and Scripting Interpreter** | PowerShell execution analysis |
+| **T1053 — Scheduled Task / Job** | identifying persistence through scheduled tasks |
+| **T1046 — Network Service Discovery** | identifying exposed services |
+| **T1040 — Network Sniffing** | PCAP traffic analysis and event reconstruction |
+| **T1564 — Hide Artifacts** | obfuscation, redaction failures, and hidden data detection |
 
 ---
 
@@ -94,18 +119,15 @@ This ensures clarity, reproducibility, and professional-level documentation.
 
 ## 🔬 Technical Domains Covered
 
-- Encoding & data transformation  
-- Web application security  
-- Session & cookie manipulation  
-- Directory traversal concepts  
-- Windows Event ID 4624 logon tracking  
-- PowerShell Script Block logging analysis  
-- Scheduled task persistence detection  
-- Obfuscation analysis (ROT13)  
-- PCAP inspection & HTTP artifact extraction  
-- User-Agent attribution  
-- File format inspection (.drawio, .odt, .pdf)  
-- Static Python code auditing  
+| Domain | Techniques |
+|------|------|
+| Web Security | authentication flaws, session manipulation, enumeration |
+| DFIR | Windows Event Logs, PowerShell logging, artifact analysis |
+| Cryptography | cipher identification and decoding |
+| OSINT | historical website investigation |
+| Network Security | PCAP analysis, service discovery |
+| Linux Security | system navigation and artifact discovery |
+| IoT Security | device behavior and data exfiltration |
 
 ---
 
@@ -115,7 +137,8 @@ This ensures clarity, reproducibility, and professional-level documentation.
 Cybersecurity | DFIR • Web • Detection Engineering  
 U.S. Navy Veteran  
 Virginia Tech — M.S. Information Technology  
-CEH | Security+ | Linux+ | Splunk
+
+CEH • Security+ • Linux+ • Splunk Core Certified
 
 ---
 
