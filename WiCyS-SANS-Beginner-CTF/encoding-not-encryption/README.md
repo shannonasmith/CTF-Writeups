@@ -170,7 +170,7 @@ From Octal → Text
 
 📸 **CyberChef Transformation**
 
-<img src="../images/image04.png" width="800">
+<img src="../images/image04_redacted.png" width="800">
 
 The decoded output produced readable text, confirming the correct encoding classification.
 
