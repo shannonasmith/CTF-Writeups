@@ -80,7 +80,7 @@ If the redaction objects are simply shapes placed over text, removing or bypassi
 
 📸 **Redaction Layer Investigation**
 
-<img src="../images/image29.png" width="800">
+<img src="../images/image29_redacted.png" width="800">
 
 This confirmed that the redacted content was still present within the document structure.
 
