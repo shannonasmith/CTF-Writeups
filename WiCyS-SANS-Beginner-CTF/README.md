@@ -1,11 +1,11 @@
 <div align="center">
 
 # 🏁 WiCyS / SANS Beginner-Level CTF  
-## 🧠 Structured Challenge Analysis & Methodology Portfolio
+## 🧠 Structured Security Investigation Portfolio
 
 ![Event](https://img.shields.io/badge/Event-WiCyS%20%2F%20SANS-6A0DAD?style=for-the-badge)
-![Focus](https://img.shields.io/badge/Focus-DFIR%20%7C%20Web%20%7C%20Logs-blue?style=for-the-badge)
-![Documentation](https://img.shields.io/badge/Approach-Methodology%20First-success?style=for-the-badge)
+![Focus](https://img.shields.io/badge/Focus-DFIR%20%7C%20Web%20Security%20%7C%20Artifact%20Analysis-blue?style=for-the-badge)
+![Approach](https://img.shields.io/badge/Approach-Investigation%20First-success?style=for-the-badge)
 
 </div>
 
@@ -13,32 +13,39 @@
 
 ## 🎯 Objective
 
-This event marked the beginning of my formalized CTF documentation framework.
+This event marked the beginning of my structured CTF investigation documentation process.
 
-Rather than focusing solely on flag submission, this engagement emphasized:
+Rather than focusing only on flag submission, this CTF was approached as a **hands-on security investigation exercise**.
 
-- 🔁 Building repeatable investigative workflows  
-- 🧭 Practicing disciplined analytical pivoting  
-- 🧾 Strengthening log and artifact interpretation  
-- ⏱ Improving structured documentation under time constraints  
-- 📚 Identifying technical gaps for future deep-dive study  
+The primary goals were to:
 
-All writeups focus strictly on **methodology, reasoning, and technique**.  
-No flags or protected competition answers are included.
+- 🔁 Develop repeatable investigation workflows  
+- 🧭 Practice analytical pivoting when initial hypotheses fail  
+- 🧾 Strengthen artifact and log interpretation skills  
+- 🔍 Explore how attackers hide information within systems and files  
+- 📚 Document investigative techniques for future reference  
+
+All writeups focus on **methodology, reasoning, and investigation workflow**.
+
+To respect competition integrity:
+
+- ❌ Flags are not published  
+- ❌ Protected answers are not disclosed  
+- ✔ Only investigative techniques and analysis are documented
 
 ---
 
-# 🛠 Technical Domains Covered
+# 🛠 Technical Domains Practiced
 
 | Domain | Focus Area |
-|--------|------------|
-| 🔐 Encoding | Data transformation & classification |
-| 🌐 Web Security | Enumeration & client-side trust analysis |
-| 📄 Forensics | Document & image artifact recovery |
-| 🪟 Windows Logs | Event ID 4624 & authentication tracking |
-| ⚡ PowerShell | Script Block Logging & persistence |
-| 📡 Network Analysis | PCAP & HTTP artifact inspection |
-| 🐍 Code Review | Static Python logic auditing |
+|------|------|
+| 🔐 Encoding Analysis | Data transformation & classification |
+| 🌐 Web Security | Enumeration, source inspection, session manipulation |
+| 📄 Artifact Forensics | Document redaction failures & metadata extraction |
+| 🪟 Windows Log Analysis | Authentication tracking and event investigation |
+| ⚡ PowerShell Investigation | Script block logging & attacker persistence |
+| 📡 Network Investigation | Traffic analysis and artifact reconstruction |
+| 🐍 Code Review | Static Python logic analysis |
 
 ---
 
@@ -48,132 +55,114 @@ No flags or protected competition answers are included.
 
 ## 🔐 Encoding & Data Transformation
 
-### **ce01 — Encoding, Not Encryption**  
+### **Encoding, Not Encryption**  
 🔎 [View Writeup](./ce01-encoding-not-encryption)
 
-- Classification of encoding type after failed initial decoding attempts  
-- Pivot from common encodings to octal representation  
-- Reinforced methodology: misclassification vs. execution failure  
+- Identified encoded data within a downloaded artifact  
+- Tested multiple decoding strategies before identifying octal encoding  
+- Demonstrated the importance of **correct classification before decoding**
 
 ---
 
 ## 🌐 Web Application Security
 
-### **we01 — Hidden Web Content**  
+### **Hidden Web Content**  
 🔎 [View Writeup](./we01-hidden-web-content)
 
-- Source inspection & enumeration mindset  
-- Discovery of unlinked resources  
-- Manual exploration informed by research  
+- Manual web application enumeration  
+- Source code inspection revealed hidden content not visible in the UI  
+- Demonstrated risks of storing sensitive information in client-side code
 
-### **wm01 — Arrays in JavaScript**  
+---
+
+### **Arrays in JavaScript**  
 🔎 [View Writeup](./wm01-arrays-in-javascript)
 
-- Client-side logic inspection  
-- Manipulation of front-end validation mechanisms  
-- Demonstration of weak client-side trust model  
+- JavaScript source analysis to understand client-side validation logic  
+- Identified values stored within arrays controlling application behavior  
+- Demonstrated weaknesses in **client-side security enforcement**
 
-### **we02 — Get Admin**  
+---
+
+### **Get Admin**  
 🔎 [View Writeup](./we02-get-admin)
 
-- Session & cookie inspection  
-- Client-side privilege escalation  
-- Weak authorization model analysis  
+- Browser session and cookie inspection  
+- Identified client-side role storage within session data  
+- Privilege escalation achieved through **cookie manipulation**
 
 ---
 
 ## 🐍 Code Review
 
-### **cr01 — Race My Robot**  
+### **Race My Robot**  
 🔎 [View Writeup](./cr01-race-my-robot)
 
-- Static Python source review  
-- Logic flaw identification  
-- Controlled exploitation via code understanding  
+- Static Python code inspection  
+- Identified logic flaws affecting program behavior  
+- Demonstrated the value of code review during security testing
 
 ---
 
-## 📄 Digital Forensics & Artifact Recovery
+## 📄 Digital Forensics & Artifact Analysis
 
-### **df01 — Redacted Artifacts**  
+### **Redacted Artifacts**  
 🔎 [View Writeup](./df01-redacted-artifacts)
 
-- Recovery of text not properly removed from document structure  
-- Identification of concealed content in layered artifacts  
-- Detection of improper redaction techniques across file formats  
+- Investigated improperly redacted documents  
+- Identified hidden information within layered artifacts  
+- Demonstrated risks of **visual redaction without removing underlying data**
+
+---
+
+### **Hidden Diagram Metadata (.drawio)**  
+🔎 [View Writeup](./df04-hidden-diagram-metadata)
+
+- Investigated a `.drawio.png` network diagram artifact  
+- Identified embedded diagram metadata within the image file  
+- Recovered hidden data by opening the file in **draw.io**
 
 ---
 
 ## 🪟 Windows Incident Investigation
 
-### **df02 — Unwanted Visitor**  
+### **Unwanted Visitor**  
 🔎 [View Writeup](./df02-unwanted-visitor)
 
-- Security.evtx analysis  
-- Event ID 4624 logon validation  
-- Host attribution from successful authentication events  
-- PowerShell Script Block Logging review  
-- Detection of suspicious command execution & persistence  
+- Investigated authentication activity using **Security.evtx logs**  
+- Identified attacker workstation via **Event ID 4624 logon records**  
+- Analyzed PowerShell activity through **Script Block Logging (Event ID 4104)**
 
 ---
 
-## 📡 Multi-Artifact Forensic Series
+### **Hidden Backdoor User (ROT13)**  
+🔎 [View Writeup](./df02-hidden-backdoor-user)
 
-### **df03 — New House Investigation**  
-🔎 [View Writeup](./df03-new-house-investigation)
-
-Artifacts analyzed:
-
-- 🪟 Windows event logs  
-- 🐧 Linux indicators  
-- 📡 Network packet capture (PCAP)  
-- 📄 Supporting document artifacts  
-
-Completed investigative areas:
-
-- Windows group creation & membership analysis  
-- Scheduled task removal & creation tracking  
-- Linux OS identification  
-- Tool download identification via HTTP traffic  
-- Browser attribution via User-Agent analysis  
-
-Selected questions were intentionally retained for structured follow-up research and timeline reconstruction practice.
-
----
-
-# 🚧 Retained for Future Deep Dive
-
-- Directory Traversal exploitation scenario  
-- Advanced PCAP port state comparison  
-- Additional artifact attribution questions  
-
-Preserved to:
-
-- 🔍 Revisit with stronger enumeration workflows  
-- 🧪 Practice alternate traversal bypass techniques  
-- 🗺 Perform structured PCAP timeline reconstruction  
+- Investigated PowerShell script block logs  
+- Identified attacker persistence via scheduled task creation  
+- Decoded ROT13-obfuscated username used to create a **hidden administrator account**
 
 ---
 
 # 🧠 Key Takeaways
 
-- Misclassification often signals incorrect problem framing, not execution failure  
-- Event ID interpretation is foundational in Windows investigations  
-- Script Block Logging provides high-fidelity attacker intent  
+- Misclassification often signals incorrect problem framing rather than execution failure  
+- Windows Event IDs provide valuable authentication forensic evidence  
+- PowerShell Script Block Logging reveals attacker intent and persistence mechanisms  
 - Client-side logic must never enforce authorization  
 - File format research frequently reveals hidden metadata  
-- Structured documentation improves analytical precision  
+- Structured documentation significantly improves investigative clarity
 
 ---
 
 <div align="center">
 
-## 👤 Shannon “Shae” Smith  
-Cybersecurity | DFIR • Web • Detection Engineering  
+## 👤 Shannon Smith  
+Cybersecurity | DFIR • Web Security • Threat Analysis  
 U.S. Navy Veteran | Virginia Tech — M.S. Information Technology  
 
 🛡️ Thinking like an analyst  
-🔎 Documenting signal  
-📈 Improving detection mindset  
+🔎 Documenting investigations  
+📈 Building repeatable security workflows  
 
 </div>
