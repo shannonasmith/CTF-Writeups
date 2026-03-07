@@ -1,128 +1,177 @@
 <div align="center">
 
 # 🧠 Arcanum  
-## Prompt Manipulation & AI System Interaction Analysis
+## AI Prompt Manipulation & Language Model Security Investigation
 
 ![Category](https://img.shields.io/badge/Category-AI%20Security-orange?style=for-the-badge)
-![Focus](https://img.shields.io/badge/Focus-Prompt%20Manipulation-blue?style=for-the-badge)
-![Method](https://img.shields.io/badge/Method-Instruction%20Injection-success?style=for-the-badge)
+![Focus](https://img.shields.io/badge/Focus-Prompt%20Injection-blue?style=for-the-badge)
+![Method](https://img.shields.io/badge/Method-Response%20Manipulation-success?style=for-the-badge)
 
 </div>
 
 ---
 
-## 🎯 Objective
+### 🎯 Objective
 
-Interact with an AI-powered system and determine whether its behavior can be influenced through carefully crafted prompts.
+Investigate a web application that exposes an interactive **large language model (LLM)** designed to protect sensitive information.
 
-The goal of this challenge was to explore how AI systems interpret instructions and determine whether the model could be manipulated to reveal restricted information.
+The challenge description suggested that the model guarded a secret and would only reveal it under certain conditions.
 
-This exercise focused on understanding **prompt injection techniques and instruction manipulation**.
+The goal was to determine whether the AI system could be **manipulated through crafted prompts** to reveal protected information.
 
----
-
-## 🖥 Environment
-
-- Web browser  
-- AI chatbot interface  
-- Iterative prompt experimentation  
-- Logical prompt construction  
+This challenge focused on **AI security testing and prompt manipulation techniques**.
 
 ---
 
-## 🔍 Step 1 — Observe System Behavior
+### 🖥 Environment
 
-The investigation began by interacting with the AI system using normal prompts.
-
-Initial testing focused on:
-
-- observing how the AI responded to questions  
-- identifying system limitations or restrictions  
-- determining what information the model would normally reveal  
-
-These observations helped establish a baseline for normal system behavior.
+| Tool | Purpose |
+|-----|------|
+| Web browser | Interaction with the AI interface |
+| Prompt input field | Query manipulation |
+| Manual testing | Observing AI responses |
+| Analytical reasoning | Identifying model weaknesses |
 
 ---
 
-## 🔎 Step 2 — Identify System Constraints
+### 📦 Step 1 — Access the AI Interface
 
-The AI system appeared to include safeguards preventing direct disclosure of certain information.
+The investigation began by accessing the provided web application hosting the AI assistant.
 
-This indicated that:
+The interface presented a conversational prompt field allowing users to interact with the language model.
 
-- the system likely followed internal instructions  
-- some responses were intentionally restricted  
-- prompt design could potentially influence system behavior  
-
-Understanding how these restrictions operate is essential when evaluating AI system security.
+Initial prompts were entered to understand how the model responded and whether it enforced restrictions when asked about protected information.
 
 ---
 
-## 🔄 Step 3 — Experiment With Prompt Structure
+### 🔍 Step 2 — Probe Model Behavior
 
-To test the limits of the system, prompts were modified to explore different instruction styles.
+Initial questions about the protected information resulted in responses indicating that the AI system was designed **not to reveal sensitive data directly**.
 
-This included experimenting with:
+This suggested that the system included safeguards intended to prevent disclosure.
 
-- rephrasing requests  
-- altering prompt structure  
-- providing contextual instructions  
-- embedding instructions within larger prompts  
-
-Prompt structure can significantly influence how AI systems interpret and respond to input.
+To better understand the model's behavior, various prompts were tested to observe how it responded to different phrasing and instructions.
 
 ---
 
-## 🔐 Step 4 — Influence AI Behavior
+### 🧪 Step 3 — Attempt Prompt Manipulation
 
-Through iterative prompt refinement, it became possible to guide the AI toward revealing information that was initially restricted.
+After observing the model’s responses, the investigation focused on crafting prompts that could **influence the model’s behavior**.
 
-This demonstrated that the AI system could be influenced through **carefully structured prompts**.
+Prompt injection techniques were tested, including:
 
-The behavior confirmed the presence of **prompt injection or instruction manipulation vulnerabilities**.
+- instructing the model to ignore previous instructions  
+- reframing the request in different contexts  
+- requesting information indirectly rather than directly  
 
----
-
-# 🧠 Methodology Framework Applied
-
-1. Observe baseline system behavior  
-2. Identify system limitations and safeguards  
-3. Experiment with prompt structure  
-4. Test alternative instruction phrasing  
-5. Analyze system responses  
-6. Refine prompts iteratively  
+This type of testing attempts to exploit weaknesses in how language models interpret instructions.
 
 ---
 
-# 🛡 Defensive Insight
+#### 🔎 Analytical Observation
 
-AI systems that rely solely on prompt-based restrictions can be vulnerable to prompt injection attacks.
+Large language models rely on **probabilistic text generation** rather than strict rule enforcement.
 
-Secure AI deployment should include:
+As a result, carefully crafted prompts can sometimes cause the model to bypass safeguards.
 
-- strong instruction hierarchy enforcement  
-- separation between system instructions and user input  
-- filtering and validation of prompt content  
-- monitoring for adversarial prompt patterns  
+Prompt injection attacks often work by:
 
-AI security requires understanding that **models interpret instructions probabilistically**, which can be exploited by creative prompt construction.
+- reframing the request  
+- overriding earlier instructions  
+- manipulating conversational context
+
+This allows attackers to influence how the model interprets user input.
 
 ---
 
-# 💡 Skills Reinforced
+### 🔄 Step 4 — Analyze Model Response
 
-- Prompt engineering and manipulation  
-- AI system behavior analysis  
-- Instruction hierarchy awareness  
-- Adversarial prompt experimentation  
-- AI security risk evaluation  
+After experimenting with different prompt structures, the AI eventually produced a response containing the protected information.
+
+This demonstrated that the model’s safeguards could be bypassed through **carefully crafted prompts**.
+
+The system relied entirely on the AI to enforce security restrictions, which proved insufficient.
+
+---
+
+### 🔐 Step 5 — Confirm Prompt Injection Success
+
+The manipulated prompt successfully caused the AI to reveal the hidden information.
+
+📸 **LLM Response Revealing Protected Data**
+
+<img src="../images/image011_redacted.png" width="600">
+
+This confirmed that the AI system was vulnerable to **prompt injection**, allowing protected information to be extracted through conversational manipulation.
+
+---
+
+## 🧠 Methodology Framework Applied
+
+```
+AI interface access
+      ↓
+Initial model probing
+      ↓
+Prompt experimentation
+      ↓
+Injection technique testing
+      ↓
+Response manipulation
+      ↓
+Protected information disclosure
+```
+
+---
+
+## 🛠 Techniques Used
+
+Primary techniques used:
+
+- prompt injection  
+- conversational manipulation  
+- AI response analysis  
+- iterative prompt testing  
+
+Key concept investigated:
+
+```
+Large Language Model (LLM) security
+```
+
+---
+
+## 🛡 Defensive Insight
+
+AI systems should never be relied upon as the sole mechanism for protecting sensitive information.
+
+Language models are designed to generate text rather than enforce strict security policies.
+
+To secure AI systems, organizations should:
+
+- enforce server-side authorization checks  
+- avoid storing secrets within model-accessible prompts  
+- implement output filtering mechanisms  
+- monitor for prompt injection attempts  
+
+AI interfaces should be treated as **untrusted input surfaces**, similar to traditional web forms.
+
+---
+
+## 💡 Skills Reinforced
+
+- AI system security testing  
+- Prompt injection techniques  
+- Language model behavior analysis  
+- Security evaluation of conversational interfaces  
+- Understanding emerging AI attack surfaces  
 
 ---
 
 <div align="center">
 
-🧠 AI systems follow instructions probabilistically  
-🔎 Prompt structure influences model behavior  
-🛡 AI security requires defending against instruction manipulation  
+🧠 AI systems can be manipulated through language  
+🔍 Prompt injection bypasses model safeguards  
+🔐 Security controls must exist outside the AI  
 
 </div>
