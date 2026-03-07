@@ -1,11 +1,10 @@
 <div align="center">
 
-# 🏁 WiCyS / TryHackMe Tier 2 CTF
+# 🏁 WiCyS / SANS Beginner-Level CTF  
+## 🧠 Structured Security Investigation Portfolio
 
-## 🧠 Advanced Security Investigation Portfolio
-
-![Event](https://img.shields.io/badge/Event-WiCyS%20CTF-6A0DAD?style=for-the-badge)
-![Focus](https://img.shields.io/badge/Focus-Web%20Security%20%7C%20Forensics%20%7C%20OSINT-blue?style=for-the-badge)
+![Event](https://img.shields.io/badge/Event-WiCyS%20%2F%20SANS-6A0DAD?style=for-the-badge)
+![Focus](https://img.shields.io/badge/Focus-DFIR%20%7C%20Web%20Security%20%7C%20Artifact%20Analysis-blue?style=for-the-badge)
 ![Approach](https://img.shields.io/badge/Approach-Investigation%20First-success?style=for-the-badge)
 
 </div>
@@ -14,40 +13,39 @@
 
 ## 🎯 Objective
 
-This CTF expanded on the investigative techniques developed during the **WiCyS / SANS Beginner-Level CTF** by introducing more complex artifacts, deeper system analysis, and multi-step problem solving.
+This event marked the beginning of my structured CTF investigation documentation process.
 
-Rather than focusing only on solving challenges, each task was approached as a **structured security investigation**.
+Rather than focusing only on flag submission, this CTF was approached as a **hands-on security investigation exercise**.
 
-The goals of this Tier 2 event were to:
+The primary goals were to:
 
-* 🔁 Apply structured investigative workflows to more complex systems
-* 🔍 Analyze attacker artifacts across multiple domains
-* 🧾 Strengthen forensic artifact reconstruction skills
-* 🧭 Practice analytical pivoting when investigative paths fail
-* 📚 Continue building a documented repository of security investigation techniques
+- 🔁 Develop repeatable investigation workflows  
+- 🧭 Practice analytical pivoting when initial hypotheses fail  
+- 🧾 Strengthen artifact and log interpretation skills  
+- 🔍 Explore how attackers hide information within systems and files  
+- 📚 Document investigative techniques for future reference  
 
-All writeups focus on **methodology, reasoning, and investigative workflow**.
+All writeups focus on **methodology, reasoning, and investigation workflow**.
 
 To respect competition integrity:
 
-* ❌ Flags are not published
-* ❌ Protected answers are not disclosed
-* ✔ Only investigative techniques and analysis are documented
+- ❌ Flags are not published  
+- ❌ Protected answers are not disclosed  
+- ✔ Only investigative techniques and analysis are documented
 
 ---
 
 # 🛠 Technical Domains Practiced
 
-| Domain                   | Focus Area                                                 |
-| ------------------------ | ---------------------------------------------------------- |
-| 🌐 Web Security          | Input manipulation, parameter tampering, command injection |
-| 🔐 Cryptography          | Encoding analysis, hashing, RSA decryption                 |
-| 📄 Digital Forensics     | Artifact inspection, data recovery, layered archives       |
-| 🧠 OSINT Investigation   | Social media analysis, geolocation, public intelligence    |
-| 🔍 Reverse Engineering   | Program behavior inspection and analysis                   |
-| 🖼 Steganography         | Hidden data extraction from files                          |
-| 📡 Network Investigation | Packet capture analysis and traffic reconstruction         |
-| 🐧 Linux Security        | File system investigation and privilege escalation         |
+| Domain | Focus Area |
+|------|------|
+| 🔐 Encoding Analysis | Data transformation & classification |
+| 🌐 Web Security | Enumeration, source inspection, session manipulation |
+| 📄 Artifact Forensics | Document redaction failures & metadata extraction |
+| 🪟 Windows Log Analysis | Authentication tracking and event investigation |
+| ⚡ PowerShell Investigation | Script block logging & attacker persistence |
+| 📡 Network Investigation | Traffic analysis and artifact reconstruction |
+| 🐍 Code Review | Static Python logic analysis |
 
 ---
 
@@ -55,281 +53,111 @@ To respect competition integrity:
 
 ---
 
+## 🔐 Encoding & Data Transformation
+
+### **Encoding, Not Encryption**  
+🔎 [View Writeup](./encoding-not-encryption)
+
+- Identified encoded data within a downloaded artifact  
+- Tested multiple decoding strategies before identifying octal encoding  
+- Demonstrated the importance of **correct classification before decoding**
+
+---
+
 ## 🌐 Web Application Security
 
-### **Endpoint**
+### **Hidden Web Content**  
+🔎 [View Writeup](./hidden-web-content)
 
-🔎 [View Writeup](./endpoint)
-
-* Investigated application behavior through endpoint enumeration
-* Analyzed server responses to identify exposed functionality
-* Demonstrated risks of improperly protected endpoints
-
----
-
-### **Notepad Online**
-
-🔎 [View Writeup](./notepad-online)
-
-* Investigated a web-based note storage system
-* Manipulated request parameters to test authorization controls
-* Demonstrated an **Insecure Direct Object Reference (IDOR)** vulnerability
+- Manual web application enumeration  
+- Source code inspection revealed hidden content not visible in the UI  
+- Demonstrated risks of storing sensitive information in client-side code
 
 ---
 
-### **Scanner**
+### **Arrays in JavaScript**  
+🔎 [View Writeup](./arrays-in-javascript)
 
-🔎 [View Writeup](./scanner)
-
-* Analyzed application scanning functionality
-* Investigated server responses to determine backend behavior
-* Identified weaknesses in how the application processed user input
-
----
-
-### **Time Travel**
-
-🔎 [View Writeup](./time-travel)
-
-* Investigated historical application states and responses
-* Identified hidden information within previous versions of application content
-* Demonstrated the value of analyzing **application history**
+- JavaScript source analysis to understand client-side validation logic  
+- Identified values stored within arrays controlling application behavior  
+- Demonstrated weaknesses in **client-side security enforcement**
 
 ---
 
-### **Arcanum**
+### **Get Admin**  
+🔎 [View Writeup](./get-admin)
 
-🔎 [View Writeup](./arcanum)
-
-* Explored hidden functionality within a web application
-* Identified unexpected server responses through manual testing
-* Demonstrated investigative enumeration techniques
-
----
-
-### **What Does the Cow Say?**
-
-🔎 [View Writeup](./what-does-the-cow-say)
-
-* Tested user input fields for command injection behavior
-* Executed shell commands through unsanitized application input
-* Demonstrated server-side command execution vulnerabilities
+- Browser session and cookie inspection  
+- Identified client-side role storage within session data  
+- Privilege escalation achieved through **cookie manipulation**
 
 ---
 
-### **The Sequel**
+## 🐍 Code Review
 
-🔎 [View Writeup](./the-sequel)
+### **Race My Robot**  
+🔎 [View Writeup](./race-my-robot)
 
-* Investigated application responses for hidden data exposure
-* Identified vulnerabilities through input manipulation
-* Demonstrated how improper validation can expose sensitive information
-
----
-
-## 🔐 Cryptography
-
-### **B4sed**
-
-🔎 [View Writeup](./b4sed)
-
-* Identified layered encoding schemes within provided data
-* Applied decoding techniques to recover hidden information
-* Demonstrated the importance of identifying encoding patterns
+- Static Python code inspection  
+- Identified logic flaws affecting program behavior  
+- Demonstrated the value of code review during security testing
 
 ---
 
-### **Exam**
+## 📄 Digital Forensics & Artifact Analysis
 
-🔎 [View Writeup](./exam)
+### **Redacted Artifacts**  
+🔎 [View Writeup](./redacted-artifacts)
 
-* Investigated encoded challenge content
-* Applied cryptographic analysis to recover hidden data
-* Demonstrated structured decoding methodology
-
----
-
-### **Exam 2**
-
-🔎 [View Writeup](./exam-2)
-
-* Analyzed password hashing techniques
-* Generated candidate passwords using rule-based mutation
-* Demonstrated hash cracking methodology
+- Investigated improperly redacted documents  
+- Identified hidden information within layered artifacts  
+- Demonstrated risks of **visual redaction without removing underlying data**
 
 ---
 
-### **Exam 3**
+### **Hidden Diagram Metadata (.drawio)**  
+🔎 [View Writeup](./hidden-diagram-data)
 
-🔎 [View Writeup](./exam-3)
-
-* Investigated RSA encryption implementation
-* Identified weaknesses allowing key recovery
-* Demonstrated practical cryptographic exploitation techniques
-
----
-
-## 📄 Digital Forensics
-
-### **CrackMyPass 1**
-
-🔎 [View Writeup](./crackmypass1)
-
-* Investigated hashed password artifacts
-* Applied cracking techniques to recover credentials
-* Demonstrated password security weaknesses
+- Investigated a .drawio.png network diagram artifact  
+- Identified embedded diagram metadata within the image file  
+- Recovered hidden data by opening the file in **draw.io**
 
 ---
 
-### **CrackMyPass 2**
+## 🪟 Windows Incident Investigation
 
-🔎 [View Writeup](./crackmypass2)
+### **Unwanted Visitor**  
+🔎 [View Writeup](./unwanted-visitor)
 
-* Generated password candidates through rule-based mutation
-* Applied automated cracking techniques using hashcat
-* Demonstrated the effectiveness of mutation-based attacks
-
----
-
-### **CrackMyPass 3**
-
-🔎 [View Writeup](./crackmypass3)
-
-* Identified unknown hashing algorithm
-* Applied hash identification techniques
-* Recovered password through targeted cracking methods
+- Investigated authentication activity using **Security.evtx logs**  
+- Identified attacker workstation via **Event ID 4624 logon records**  
+- Analyzed PowerShell activity through **Script Block Logging (Event ID 4104)**
 
 ---
 
-### **Stolen Footprints**
+### **Hidden Backdoor User (ROT13)**  
+🔎 [View Writeup](./hidden-backdoor-user)
 
-🔎 [View Writeup](./stolen-footprints)
-
-* Investigated packet capture artifacts
-* Identified attacker file retrieval using FTP commands
-* Reconstructed the stolen file through TCP stream analysis
-
----
-
-### **Mayhem**
-
-🔎 [View Writeup](./mayhem)
-
-* Investigated network artifacts contained in forensic evidence
-* Identified encrypted attacker command-and-control traffic
-* Reconstructed attacker communication through artifact analysis
-
----
-
-## 🧠 OSINT Investigation
-
-### **Eggciting Recovery**
-
-🔎 [View Writeup](./eggciting-recovery)
-
-* Investigated public data sources for hidden information
-* Applied OSINT research techniques to identify relevant artifacts
-
----
-
-### **FooTPrints**
-
-🔎 [View Writeup](./footprints)
-
-* Investigated digital traces left by an attacker
-* Correlated open-source information to identify relevant evidence
-
----
-
-### **TryFindMe**
-
-🔎 [View Writeup](./tryfindme)
-
-* Performed reverse image search to determine image location
-* Correlated OSINT sources to verify geographic location
-* Demonstrated practical image geolocation techniques
-
----
-
-### **Operation Slither 1**
-
-🔎 [View Writeup](./operation-slither)
-
-* Investigated social media activity of a suspected threat actor
-* Identified encoded messages hidden within public posts
-* Recovered hidden information through data decoding
-
----
-
-## 🖼 Steganography
-
-### **Chat Bubble**
-
-🔎 [View Writeup](./chat-bubble)
-
-* Investigated a suspicious image file
-* Identified embedded data within the artifact
-* Extracted hidden content using forensic analysis techniques
-
----
-
-## 📡 Network Investigation
-
-### **Packet Inspector**
-
-🔎 [View Writeup](./packet-inspector)
-
-* Analyzed network packet captures using Wireshark
-* Identified suspicious communication patterns
-* Reconstructed attacker activity from captured traffic
-
----
-
-### **Strange Beacon**
-
-🔎 [View Writeup](./strange-beacon)
-
-* Investigated abnormal network communication
-* Identified beaconing behavior consistent with command-and-control activity
-
----
-
-## 🐧 Linux Security
-
-### **Get That Flag Out**
-
-🔎 [View Writeup](./get-that-flag-out)
-
-* Investigated a misconfigured SUID binary
-* Demonstrated privilege escalation through binary abuse
-* Highlighted risks of improper permission management
-
----
-
-### **Archives**
-
-🔎 [View Writeup](./archives)
-
-* Investigated nested archive artifacts
-* Identified multiple compression layers with altered file extensions
-* Recovered hidden data through systematic archive extraction
+- Investigated PowerShell script block logs  
+- Identified attacker persistence via scheduled task creation  
+- Decoded ROT13-obfuscated username used to create a **hidden administrator account**
 
 ---
 
 # 🧠 Key Takeaways
 
-* Authorization flaws can expose sensitive data even when authentication is present
-* File signatures provide more reliable format identification than file extensions
-* OSINT investigations can reveal attacker behavior through public activity
-* Misconfigured Linux permissions often lead to privilege escalation vulnerabilities
-* Layered archives and encoded data are common techniques for hiding information
-* Structured investigative documentation improves analytical clarity
+- Misclassification often signals incorrect problem framing rather than execution failure  
+- Windows Event IDs provide valuable authentication forensic evidence  
+- PowerShell Script Block Logging reveals attacker intent and persistence mechanisms  
+- Client-side logic must never enforce authorization  
+- File format research frequently reveals hidden metadata  
+- Structured documentation significantly improves investigative clarity
 
 ---
 
 <div align="center">
 
-## 👤 Shannon Smith
+👤 Shannon Smith
 
 Cybersecurity | DFIR • Web Security • Threat Analysis
 U.S. Navy Veteran | Virginia Tech — M.S. Information Technology
