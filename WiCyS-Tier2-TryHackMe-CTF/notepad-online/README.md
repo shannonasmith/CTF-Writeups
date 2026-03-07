@@ -13,11 +13,11 @@
 
 ### 🎯 Objective
 
-Investigate a web-based note-taking service that claims user notes are visible **only to the account owner**.
+Investigate a web-based note-taking application that claims user notes are **only visible to the account owner**.
 
-The challenge required analyzing how the application retrieves user notes and determining whether access controls were properly enforced.
+The challenge involved authenticating to the application and analyzing how the system retrieves stored notes.
 
-The goal was to determine whether **direct object references within the application could expose other users’ data**.
+The objective was to determine whether the application properly enforced **authorization controls** or whether user data could be accessed by manipulating request parameters.
 
 ---
 
@@ -25,109 +25,87 @@ The goal was to determine whether **direct object references within the applicat
 
 | Tool | Purpose |
 |-----|------|
-| Web browser | Application interaction |
-| Browser address bar | Parameter manipulation |
+| Web browser | Interact with the target application |
+| Browser address bar | Modify request parameters |
 | Manual testing | Authorization validation |
-| Application observation | Access control behavior |
 
 ---
 
-### 📦 Step 1 — Access the Notepad Application
+### 📦 Step 1 — Authenticate to the Application
 
-The investigation began by accessing the provided web application and logging in using the supplied credentials.
+The investigation began by logging into the application using the credentials provided by the challenge.
 
-📸 **Application Login Interface**
+```
+User: noel
+Pass: pass1234
+```
 
-<img src="../images/image008.png" width="600">
+After authenticating successfully, the application displayed the user’s notes.
 
-After authentication, the application displayed the user’s personal notes within the interface.
-
-The application appeared to assign notes based on a **numeric identifier present in the page URL**.
+At first glance, the application appeared to restrict access to the authenticated user's content.
 
 ---
 
-### 🔍 Step 2 — Inspect URL Parameters
+### 🔍 Step 2 — Inspect Application Behavior
 
-Closer inspection of the browser address bar revealed that the application used a query parameter similar to:
+After logging in, the browser address bar revealed that the application retrieved notes using an **ID parameter**.
+
+Example URL:
 
 ```
 ?id=1
 ```
 
-📸 **Observed URL Parameter**
+Applications that use predictable identifiers can sometimes expose data belonging to other users if authorization checks are not properly enforced.
 
-<img src="../images/image009.png" width="600">
-
-This suggested that the application retrieved note data by referencing an **internal numeric identifier**.
-
-Applications that directly expose internal identifiers can sometimes allow users to **access other resources by modifying the parameter value**.
+This type of vulnerability is commonly known as an **Insecure Direct Object Reference (IDOR)**.
 
 ---
 
-### 🧪 Step 3 — Test Parameter Manipulation
+### 🧪 Step 3 — Manipulate the Identifier Parameter
 
-To test whether the application properly enforced authorization controls, the numeric identifier was modified manually.
+To test whether the application validated note ownership, the ID parameter was manually modified.
 
-The parameter value was changed to a different number to observe how the application responded.
+Original request:
 
-📸 **Modified Identifier**
+```
+?id=1
+```
 
-<img src="../images/image010.png" width="600">
+Modified request:
 
-The application responded by displaying a different note resource, indicating that the system retrieved data solely based on the identifier provided in the request.
+```
+?id=0
+```
 
----
-
-#### 🔎 Analytical Observation
-
-This behavior indicates a classic **Insecure Direct Object Reference (IDOR)** vulnerability.
-
-IDOR occurs when:
-
-- applications reference internal objects directly
-- authorization checks are missing or insufficient
-- users can access resources by altering identifiers
-
-Instead of verifying ownership of the requested object, the application simply returned the resource associated with the provided identifier.
+If authorization controls were properly implemented, the application should reject this request or return an error.
 
 ---
 
-### 🔄 Step 4 — Analyze Application Response
+### 🔐 Step 4 — Confirm Unauthorized Data Access
 
-The modified request returned a different note stored on the system.
-
-This confirmed that the application allowed users to **access resources that were not associated with their account**.
-
-The vulnerability occurred because the server did not validate whether the requesting user was authorized to access the specified resource.
-
----
-
-### 🔐 Step 5 — Confirm Unauthorized Data Access
-
-Once the parameter manipulation was verified, the application displayed a protected resource that should not have been accessible.
+After modifying the ID parameter, the application returned data belonging to another user.
 
 📸 **Unauthorized Note Access**
 
-<img src="../images/image011_redacted.png" width="600">
+<img src="../images/image008_redacted.png" width="600">
 
-This confirmed that the application was vulnerable to **Insecure Direct Object Reference**, allowing unauthorized access to internal data through simple parameter manipulation.
+This confirmed that the application did not verify whether the authenticated user was authorized to access the requested note.
 
 ---
 
 ## 🧠 Methodology Framework Applied
 
 ```
-Application login
+Application accessed
       ↓
-URL parameter inspection
+Authentication performed
       ↓
-Identifier discovery
+Request parameters inspected
       ↓
-Parameter manipulation
+Identifier modified
       ↓
-Unauthorized resource access
-      ↓
-Access control vulnerability confirmed
+Unauthorized data accessed
 ```
 
 ---
@@ -136,10 +114,9 @@ Access control vulnerability confirmed
 
 Primary techniques used:
 
-- application interface inspection  
-- URL parameter analysis  
-- manual parameter manipulation  
-- authorization testing  
+- web application testing  
+- parameter manipulation  
+- authorization control testing  
 
 Key concept investigated:
 
@@ -151,35 +128,33 @@ Insecure Direct Object Reference (IDOR)
 
 ## 🛡 Defensive Insight
 
-Applications must enforce **server-side authorization checks** whenever resources are requested.
+Applications must enforce proper **authorization checks** when retrieving user data.
 
-If identifiers are exposed within URLs, the server must verify that the authenticated user is permitted to access the requested object.
+Even when users are authenticated, the system must verify that they are authorized to access the requested resource.
 
-Recommended security practices include:
+Secure implementations should:
 
-- validating object ownership on the server  
-- implementing proper access control checks  
-- avoiding predictable sequential identifiers  
-- logging and monitoring suspicious access attempts  
+- validate resource ownership
+- avoid predictable identifiers
+- enforce server-side authorization checks
 
-Without proper authorization validation, attackers can enumerate identifiers to access sensitive data belonging to other users.
+Failure to implement these controls can allow attackers to access other users’ data.
 
 ---
 
 ## 💡 Skills Reinforced
 
 - Web application reconnaissance  
-- Authorization control analysis  
-- URL parameter manipulation  
-- Identification of IDOR vulnerabilities  
-- Understanding insecure direct object references  
+- Authorization testing  
+- Parameter manipulation  
+- Identifying IDOR vulnerabilities  
 
 ---
 
 <div align="center">
 
-🔍 Always test how applications reference internal objects  
-🧠 Authorization must be enforced server-side  
-🔐 Never trust identifiers supplied by the client  
+📝 Authentication does not equal authorization  
+🔍 Always test parameter-based access controls  
+🧠 IDOR vulnerabilities can expose sensitive data  
 
 </div>
