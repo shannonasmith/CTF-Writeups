@@ -106,7 +106,7 @@ role=admin
 
 📸 **Cookie Value Modification**
 
-<img src="../images/image22.png" width="800">
+<img src="../images/image22_redacted.png" width="800">
 
 After modifying the cookie, the page was refreshed to test whether the application would grant elevated access.
 
