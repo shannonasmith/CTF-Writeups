@@ -52,15 +52,13 @@ To identify the location of the image, a reverse image search was performed.
 
 Reverse image searches allow investigators to locate where images appear online and identify related sources.
 
-The image was uploaded to a reverse image search engine, which revealed several matching results related to a famous surfing destination.
+One of the search results referenced a surfing event article containing the same image.
 
-One of the results referenced the location:
+📸 **Reverse Image Search Result**
 
-```
-Jeffreys Bay
-```
+<img src="../images/image046.5.png" width="600">
 
-Further research confirmed that the image matched photographs taken at this location.
+The article referenced the location **Jeffreys Bay**, a famous surfing destination.
 
 ---
 
@@ -84,18 +82,18 @@ This technique is commonly used in investigations involving:
 
 Additional research confirmed that the image corresponded to **Jeffreys Bay**, a well-known surfing location in South Africa.
 
-Jeffreys Bay is internationally recognized for its surf breaks, particularly **Supertubes**, which is considered one of the most famous right-hand point breaks in the world. :contentReference[oaicite:1]{index=1}
+Jeffreys Bay is internationally recognized for its surf breaks, particularly **Supertubes**, which is considered one of the most famous right-hand point breaks in the world.
 
 Comparing images of the location with the challenge image confirmed the match.
 
 ---
 
-### 🔐 Step 4 — Confirm the Flag
+### 🔐 Step 4 — Confirm the Investigation Result
 
-After verifying the location of the photograph, the flag was constructed according to the required format.
+After verifying the location of the photograph, the answer was formatted according to the challenge requirements.
 
 ```
-THM{jeffreys_bay}
+THM{[redacted]}
 ```
 
 This confirmed that the image was taken at **Jeffreys Bay**.
