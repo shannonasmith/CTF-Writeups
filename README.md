@@ -6,15 +6,16 @@ Hands-on cybersecurity investigations across **web exploitation, DFIR, cryptogra
 
 <br>
 
-<img src="assets/images/cyber-study.png" width="650"/>
+<img src="images/cyber-study.png" width="650"/>
 
 <br><br>
 
-<img src="assets/badges/wicys-tier1.png" width="120"/>
-<img src="assets/badges/wicys-tier2.png" width="120"/>
-<img src="assets/badges/gfact.png" width="120"/>
-<img src="assets/badges/wicys-attendee.png" width="120"/>
-<img src="assets/badges/ncl-ctf.png" width="120"/>
+<img src="images/wicys-tier1.png" width="120"/>
+<img src="images/wicys-tier2.png" width="120"/>
+<img src="images/wicys-tier3.png" width="120"/>
+<img src="images/gfact.png" width="120"/>
+<!-- <img src="images/wicys-attendee.png" width="120"/> -->
+<img src="images/ncl-ctf.png" width="120"/>
 
 <br><br>
 
