@@ -5,7 +5,7 @@
 
 ![Category](https://img.shields.io/badge/Category-Cryptography-orange?style=for-the-badge)
 ![Focus](https://img.shields.io/badge/Focus-Hash%20Cracking-blue?style=for-the-badge)
-![Method](https://img.shields.io/badge/Method-Rule-Based%20Mutation-success?style=for-the-badge)
+![Method](https://img.shields.io/badge/Method-Rule_Based_Mutation-success?style=for-the-badge)
 
 </div>
 
