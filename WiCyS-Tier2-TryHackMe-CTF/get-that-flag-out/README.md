@@ -1,127 +1,169 @@
 <div align="center">
 
 # 🚩 Get That Flag Out  
-## Linux File Discovery & System Artifact Enumeration
+## Linux Privilege Escalation & SUID Misconfiguration Exploitation
 
 ![Category](https://img.shields.io/badge/Category-Linux%20Security-orange?style=for-the-badge)
-![Focus](https://img.shields.io/badge/Focus-File%20Discovery-blue?style=for-the-badge)
-![Method](https://img.shields.io/badge/Method-System%20Enumeration-success?style=for-the-badge)
+![Focus](https://img.shields.io/badge/Focus-Privilege%20Escalation-blue?style=for-the-badge)
+![Method](https://img.shields.io/badge/Method-SUID%20Abuse-success?style=for-the-badge)
 
 </div>
 
 ---
 
-## 🎯 Objective
+### 🎯 Objective
 
-Investigate a Linux environment to locate a hidden artifact stored somewhere within the system.
+Investigate a Linux system where an application has been configured with the **SUID (Set User ID) bit**.
 
-The challenge required exploring the file system, identifying relevant directories, and examining files to locate the information required to complete the task.
+The challenge description suggested that the application had been incorrectly configured to run with elevated privileges.
 
-This exercise focused on **Linux system navigation and artifact discovery techniques**.
-
----
-
-## 🖥 Environment
-
-- Kali Linux  
-- Terminal-based navigation tools  
-- Linux file inspection utilities  
-- System enumeration techniques  
+The objective was to determine whether the SUID configuration could be abused to access a restricted file owned by the root user.
 
 ---
 
-## 🔍 Step 1 — Explore the File System
+### 🖥 Environment
 
-The investigation began by reviewing the accessible directories within the system.
-
-Initial exploration focused on:
-
-- identifying available directories  
-- determining where relevant files might be stored  
-- examining the structure of the file system  
-
-Understanding the layout of the system is essential when searching for hidden artifacts.
+| Tool | Purpose |
+|-----|------|
+| Kali Linux AttackBox | Investigation environment |
+| Linux terminal | Command execution |
+| `file` | Inspect binary information |
+| SUID misconfiguration | Privilege escalation |
 
 ---
 
-## 🔎 Step 2 — Enumerate Files and Directories
+### 📦 Step 1 — Identify the Suspicious Binary
 
-Using Linux command-line tools, directories and files were enumerated to identify items that warranted further inspection.
+The investigation began by inspecting the binary located in Johnny's home directory.
 
-Key steps included:
+```bash
+file /home/johnny/openvpn
+```
 
-- listing directory contents  
-- identifying unusual file names  
-- locating files that appeared relevant to the challenge  
+The output confirmed that the file was an executable binary.
 
-Enumeration allows investigators to map the available system resources.
-
----
-
-## 🔄 Step 3 — Inspect Candidate Files
-
-After identifying potential files of interest, their contents were examined.
-
-Inspection focused on:
-
-- reviewing file contents  
-- identifying hidden or embedded information  
-- verifying whether the file contained the relevant artifact  
-
-System artifacts are often stored within files that appear ordinary at first glance.
+Because the challenge description mentioned SUID configuration, the next step was to determine whether the binary could be executed with elevated privileges.
 
 ---
 
-## 🔐 Step 4 — Recover the Artifact
+### 🔍 Step 2 — Understand the SUID Risk
 
-Through systematic enumeration and file inspection, the relevant artifact was located within the system.
+The **SUID bit** allows a program to run with the permissions of the file owner rather than the user executing it.
 
-This confirmed that the information required to complete the challenge was stored within the accessible file structure.
+If the file owner is **root**, any user who runs the binary effectively executes it with root privileges.
 
-The investigation demonstrated how careful exploration of a system can reveal hidden or overlooked data.
+Misconfigured SUID binaries can therefore allow attackers to:
 
----
+- escalate privileges
+- access restricted files
+- execute privileged commands
 
-# 🧠 Methodology Framework Applied
-
-1. Explore system directories  
-2. Enumerate files and folders  
-3. Identify suspicious or relevant artifacts  
-4. Inspect file contents  
-5. Validate discovered information  
-6. Confirm artifact recovery  
+This makes SUID misconfigurations a common privilege escalation vector.
 
 ---
 
-# 🛡 Defensive Insight
+### 🧪 Step 3 — Attempt to Abuse the Binary
 
-Unauthorized access to a system often involves searching the file system for sensitive information.
+Because the openvpn binary had elevated permissions, it could potentially be abused to access restricted files.
 
-Organizations should implement safeguards such as:
+The binary was executed with the path to the protected file as an argument.
 
-- restricting file access permissions  
-- storing sensitive data securely  
-- monitoring for abnormal file access activity  
-- limiting user access to only necessary directories  
+```bash
+/home/johnny/openvpn /root/flag.txt
+```
 
-Proper file access controls help reduce the risk of sensitive data exposure.
+If the binary runs with root privileges, it will be able to access the file located inside the `/root` directory.
 
 ---
 
-# 💡 Skills Reinforced
+#### 🔎 Analytical Observation
 
-- Linux file system navigation  
-- System enumeration techniques  
-- File artifact discovery  
-- Command-line investigation workflows  
-- Structured system exploration  
+Privilege escalation vulnerabilities often arise when applications are granted elevated permissions without sufficient safeguards.
+
+Common risky configurations include:
+
+- SUID-enabled binaries
+- writable system files
+- improperly restricted executables
+
+Attackers frequently search for these conditions during post-exploitation to gain full system access.
+
+---
+
+### 🔐 Step 4 — Confirm Successful Privilege Escalation
+
+Executing the binary successfully revealed the contents of the restricted file.
+
+```
+THM{[redacted]}
+```
+
+This confirmed that the SUID misconfiguration allowed the binary to access files owned by the root user.
+
+---
+
+## 🧠 Methodology Framework Applied
+
+```
+Suspicious binary identified
+      ↓
+Binary inspection performed
+      ↓
+SUID misconfiguration recognized
+      ↓
+Binary executed with elevated privileges
+      ↓
+Restricted file accessed
+```
+
+---
+
+## 🛠 Techniques Used
+
+Primary techniques used:
+
+- Linux privilege escalation  
+- SUID misconfiguration abuse  
+- binary execution with elevated permissions  
+- restricted file access  
+
+Key concept investigated:
+
+```
+SUID privilege escalation
+```
+
+---
+
+## 🛡 Defensive Insight
+
+SUID misconfigurations can introduce serious privilege escalation vulnerabilities.
+
+Applications should only be granted SUID privileges when absolutely necessary, and binaries with elevated permissions should be carefully audited.
+
+Organizations should implement controls such as:
+
+- regularly auditing SUID-enabled binaries  
+- restricting executable permissions  
+- monitoring for abnormal privilege escalation activity  
+
+Proper privilege management reduces the risk of attackers gaining root access.
+
+---
+
+## 💡 Skills Reinforced
+
+- Linux privilege escalation techniques  
+- Identifying SUID misconfigurations  
+- Understanding binary permission risks  
+- Post-exploitation investigation  
 
 ---
 
 <div align="center">
 
-🚩 Hidden artifacts are often discovered through systematic exploration  
-🔎 Enumerate the system before assuming where data exists  
-🧠 Effective investigations begin with understanding the environment  
+🚩 Misconfigured privileges can expose critical system files  
+🔍 SUID binaries must be carefully controlled  
+🧠 Privilege escalation often begins with small permission mistakes  
 
 </div>
