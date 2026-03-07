@@ -15,7 +15,7 @@
 
 Investigate a web application suspected of being vulnerable to **SQL injection** due to improper handling of user-supplied input.
 
-The challenge description hinted that the application did not properly sanitize database queries.
+The challenge hinted that the application did not properly sanitize database queries.
 
 The objective was to determine whether database queries could be manipulated to extract internal information from the backend database.
 
@@ -40,21 +40,21 @@ After launching the challenge machine, the web application was accessed through 
 http://10.10.x.x:3000
 ```
 
-The application contained multiple pages including a **billing section** that appeared to interact with backend database records.
+The application contained multiple pages including a **billing section**, which appeared to retrieve records from a backend database.
 
 📸 **Application Billing Interface**
 
 <img src="../images/image014.png" width="600">
 
-Because this page retrieved database information dynamically, it became the primary candidate for SQL injection testing.
+Because this page dynamically displayed database content, it became the primary candidate for SQL injection testing.
 
 ---
 
-### 🔍 Step 2 — Test Basic SQL Injection
+### 🔍 Step 2 — Test for SQL Injection
 
-To determine whether the application was vulnerable to SQL injection, a simple query manipulation payload was inserted into the input field.
+To determine whether the input field was vulnerable to SQL injection, a simple UNION query payload was inserted.
 
-```
+```sql
 1 UNION SELECT 1,2,3
 ```
 
@@ -62,7 +62,7 @@ To determine whether the application was vulnerable to SQL injection, a simple q
 
 <img src="../images/image015.png" width="600">
 
-The server returned a modified response, confirming that user input was being inserted directly into the backend SQL query.
+The server returned a modified response, confirming that user input was being inserted directly into a SQL query without proper sanitization.
 
 This behavior confirmed the presence of a **SQL injection vulnerability**.
 
@@ -70,9 +70,9 @@ This behavior confirmed the presence of a **SQL injection vulnerability**.
 
 ### 🧪 Step 3 — Enumerate Database Tables
 
-Once SQL injection was confirmed, the next step was to identify the database structure.
+Once SQL injection was confirmed, the next step was to identify the available database tables.
 
-A query was crafted to retrieve table names from the database metadata:
+This was accomplished by querying the database metadata stored in the `information_schema` tables.
 
 ```sql
 1 UNION SELECT 1,table_name,3 FROM information_schema.tables
@@ -82,19 +82,17 @@ A query was crafted to retrieve table names from the database metadata:
 
 <img src="../images/image016.png" width="600">
 
-This query returned information about the database tables, allowing the investigation to identify potential targets containing sensitive data.
+The response revealed the names of tables present in the database, allowing the investigation to identify tables likely to contain sensitive data.
 
 ---
 
 ### 🔄 Step 4 — Identify Table Columns
 
-After locating a table of interest, the next step was to enumerate the column names within that table.
-
-The following query retrieved column information from the database schema:
+After identifying a table of interest, the next step was to enumerate the column names associated with that table.
 
 ```sql
-1 UNION SELECT 1,GROUP_CONCAT(column_name),3 
-FROM information_schema.columns 
+1 UNION SELECT 1,GROUP_CONCAT(column_name),3
+FROM information_schema.columns
 WHERE table_name='flag'
 ```
 
@@ -102,19 +100,21 @@ WHERE table_name='flag'
 
 <img src="../images/image017.png" width="600">
 
-This step revealed the structure of the table storing the protected data.
+This query revealed the structure of the table storing the protected data.
 
 ---
 
 ### 🔐 Step 5 — Retrieve Sensitive Data
 
-Once the table structure was understood, the query was adjusted to retrieve the stored information from the identified column.
+With the table structure identified, the final step was to retrieve the contents stored within the relevant column.
 
 📸 **Database Data Retrieval**
 
 <img src="../images/image018_redacted.png" width="600">
 
-The application returned the contents of the protected field, confirming that the SQL injection vulnerability allowed **direct extraction of backend database data**.
+The response confirmed that database records could be extracted directly through the injection point.
+
+This demonstrated that the application allowed **full database enumeration and data extraction through SQL injection**.
 
 ---
 
@@ -129,7 +129,7 @@ SQL injection confirmation
       ↓
 Database table enumeration
       ↓
-Column structure discovery
+Column discovery
       ↓
 Sensitive data extraction
 ```
@@ -143,7 +143,7 @@ Primary techniques used:
 - SQL injection testing  
 - UNION query manipulation  
 - database schema enumeration  
-- metadata extraction using `information_schema`  
+- metadata extraction via `information_schema`
 
 Key concept investigated:
 
@@ -161,8 +161,8 @@ Secure development practices include:
 
 - parameterized queries  
 - prepared statements  
-- input validation and sanitization  
-- restricting database permissions  
+- strict input validation  
+- least-privilege database permissions  
 
 Proper query handling prevents attackers from manipulating database commands and extracting sensitive information.
 
@@ -171,10 +171,10 @@ Proper query handling prevents attackers from manipulating database commands and
 ## 💡 Skills Reinforced
 
 - Web application vulnerability testing  
-- SQL injection identification  
+- SQL injection detection  
 - Database enumeration techniques  
 - Query manipulation and schema discovery  
-- Secure database interaction awareness  
+- Secure database design awareness  
 
 ---
 
