@@ -25,10 +25,10 @@ The goal was to determine if the application was vulnerable to **command injecti
 
 | Tool | Purpose |
 |-----|------|
-| Web Browser | Interaction with the target application |
-| Kali Linux | Investigation environment |
-| Basic Linux Commands | Directory enumeration and file inspection |
-| Command Injection | Manipulating backend command execution |
+| Web browser | Application interaction |
+| Kali Linux AttackBox | Testing environment |
+| Browser input field | Injection testing |
+| Linux commands | Server file enumeration |
 
 ---
 
@@ -58,7 +58,7 @@ If the application executed the input within a shell context, this command would
 
 📸 **Server Directory Listing**
 
-<img src="../images/image012_redacted.png" width="400">
+<img src="../images/image012_redacted.png" width="600">
 
 The response revealed several server-side files:
 
@@ -85,7 +85,7 @@ $(cat flag-[redacted].txt)
 
 📸 **File Contents Retrieved**
 
-<img src="../images/image013_redacted.png" width="400">
+<img src="../images/image013_redacted.png" width="600">
 
 The server executed the injected command and returned the contents of the file in the HTTP response, confirming that arbitrary commands could be executed through the vulnerable input field.
 
@@ -126,10 +126,10 @@ Command injection vulnerabilities occur when applications execute user-supplied 
 
 Secure development practices include:
 
-- validating user input
-- sanitizing special characters
-- avoiding direct shell execution
-- using parameterized command execution methods
+- validating user input  
+- sanitizing special characters  
+- avoiding direct shell execution  
+- using parameterized command execution methods  
 
 Without proper input validation, attackers may execute arbitrary system commands and potentially gain full system access.
 
