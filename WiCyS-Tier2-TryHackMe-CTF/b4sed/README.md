@@ -89,7 +89,7 @@ After applying the correct decoding sequence, the hidden message became visible.
 
 📸 **Decoded Message**
 
-<img src="../images/image020_redacted.png" width="600">
+<img src="../images/image020_redacted.png" width="800">
 
 This confirmed that the encoded string contained a message that had been intentionally obfuscated through multiple encoding layers.
 
