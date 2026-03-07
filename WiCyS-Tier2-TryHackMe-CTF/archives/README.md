@@ -1,126 +1,256 @@
 <div align="center">
 
 # 📦 Archives  
-## Archive Extraction & File Artifact Investigation
+## Multi-Layer Archive Analysis & File Recovery
 
-![Category](https://img.shields.io/badge/Category-File%20Analysis-orange?style=for-the-badge)
-![Focus](https://img.shields.io/badge/Focus-Archive%20Inspection-blue?style=for-the-badge)
-![Method](https://img.shields.io/badge/Method-Artifact%20Extraction-success?style=for-the-badge)
+![Category](https://img.shields.io/badge/Category-Linux-orange?style=for-the-badge)
+![Focus](https://img.shields.io/badge/Focus-Archive%20Analysis-blue?style=for-the-badge)
+![Method](https://img.shields.io/badge/Method-File%20Type%20Inspection-success?style=for-the-badge)
 
 </div>
 
 ---
 
-## 🎯 Objective
+### 🎯 Objective
 
-Investigate an archived file and determine whether useful information can be recovered from its contents.
+Investigate an artifact containing confidential data hidden within multiple layers of compressed archives.
 
-The challenge required extracting archived data and examining the contained files to identify artifacts relevant to the investigation.
+The challenge description indicated that the file extensions had been intentionally altered to obscure their true formats.
 
-This exercise focused on understanding how archived files can conceal information and how systematic extraction and inspection can reveal hidden content.
-
----
-
-## 🖥 Environment
-
-- Kali Linux  
-- Terminal utilities  
-- Archive extraction tools  
-- File inspection commands  
+The objective was to identify the real file types, decompress each archive layer, and recover the hidden information.
 
 ---
 
-## 🔍 Step 1 — Identify the Archive File
+### 🖥 Environment
 
-The investigation began by examining the provided archive.
-
-Initial inspection focused on:
-
-- identifying the archive format  
-- determining whether the archive contained nested files or directories  
-- confirming that the archive could be extracted successfully  
-
-Archive formats frequently store multiple layers of files that require sequential extraction.
-
----
-
-## 🔎 Step 2 — Extract the Archive
-
-Using standard extraction utilities, the archive was unpacked to reveal its internal contents.
-
-This step involved:
-
-- extracting the primary archive  
-- reviewing the extracted directory structure  
-- identifying files that required additional inspection  
-
-Extracting the archive allowed direct access to the underlying artifacts.
+| Tool | Purpose |
+|-----|------|
+| Kali Linux AttackBox | Investigation environment |
+| Linux terminal | Command execution |
+| `file` | Identify file signatures |
+| `unzip` | Extract ZIP archives |
+| `tar` | Extract TAR archives |
+| `gzip` | Decompress gzip files |
+| `xz` | Decompress xz files |
+| `pdftotext` | Extract text from PDF documents |
 
 ---
 
-## 🔄 Step 3 — Inspect Extracted Files
+### 📦 Step 1 — Locate the Artifact
 
-After extraction, the files contained within the archive were reviewed.
+The investigation began by navigating to the Desktop directory where the challenge artifact was stored.
 
-The investigation focused on:
+```bash
+cd Desktop
+ls -l
+```
 
-- identifying file types  
-- reviewing filenames and directory structure  
-- examining file contents for relevant information  
+Two files were present:
 
-Files inside archives may contain embedded data, configuration artifacts, or other investigative clues.
+```
+first_part
+second_part
+```
 
----
-
-## 🔐 Step 4 — Locate Relevant Artifact
-
-Further inspection of the extracted files revealed the artifact necessary to complete the challenge.
-
-By analyzing the contents of the archive, the investigation confirmed that the relevant information had been stored within the compressed file structure.
-
-This demonstrated how archived files can serve as containers for hidden or overlooked artifacts.
+These files appeared to represent segments of a nested archive structure.
 
 ---
 
-# 🧠 Methodology Framework Applied
+### 🔍 Step 2 — Identify the First Archive Layer
 
-1. Identify archive format  
-2. Extract archive contents  
-3. Review directory structure  
-4. Inspect individual files  
-5. Analyze file contents  
-6. Confirm presence of relevant artifact  
+The first file was inspected to determine its true format.
+
+```bash
+file first_part
+```
+
+The output revealed that the file was actually a **ZIP archive**.
+
+The archive was extracted using:
+
+```bash
+unzip first_part
+```
+
+📸 **First Archive Extraction**
+
+<img src="../images/image051.png" width="600">
+
+Extracting the archive produced a new file:
+
+```
+second_part
+```
 
 ---
 
-# 🛡 Defensive Insight
+### 🧪 Step 3 — Extract the TAR Archive
 
-Archived files are commonly used to package large sets of data, but they can also conceal malicious or sensitive content.
+The second file was inspected to determine its format.
 
-Security investigations should include:
+```bash
+file second_part
+```
 
-- inspecting archived attachments  
-- extracting nested archives  
-- analyzing compressed artifacts for hidden data  
+The result indicated that the file was a **POSIX tar archive**.
 
-Failure to inspect archived files thoroughly can allow malicious content or sensitive data to go unnoticed.
+The archive was extracted using:
+
+```bash
+tar -xf second_part
+```
+
+📸 **TAR Archive Extraction**
+
+<img src="../images/image052.png" width="600">
+
+After extraction, a new file appeared:
+
+```
+third_part
+```
 
 ---
 
-# 💡 Skills Reinforced
+#### 🔎 Analytical Observation
 
-- Archive extraction techniques  
-- File artifact investigation  
-- Directory structure analysis  
-- Linux command-line file inspection  
-- Systematic artifact review  
+File extensions can be easily manipulated and should not be trusted as indicators of file type.
+
+Tools like `file` analyze **file signatures (magic bytes)** instead of extensions, making them essential for forensic analysis and archive investigation.
+
+---
+
+### 🔄 Step 4 — Identify the Compression Format
+
+The newly extracted file was inspected further.
+
+```bash
+hexdump -C third_part | head -n 16
+```
+
+📸 **Compression Signature Inspection**
+
+<img src="../images/image053.png" width="600">
+
+The hex output revealed compression signatures indicating that the file was part of another compressed archive.
+
+The data was decompressed and written to a new file:
+
+```bash
+gunzip -c third_part > fourth_part.xz
+```
+
+The new file was inspected again:
+
+```bash
+file fourth_part.xz
+```
+
+The result confirmed the file contained **XZ compressed data**.
+
+---
+
+### 🔐 Step 5 — Recover the Hidden Document
+
+The final archive layer was decompressed.
+
+```bash
+xz -d fourth_part.xz
+```
+
+The resulting file was inspected:
+
+```bash
+file fourth_part
+```
+
+The output revealed a **PDF document**.
+
+The contents of the document were extracted using:
+
+```bash
+pdftotext fourth_part -
+```
+
+📸 **Recovered Confidential Document**
+
+<img src="../images/image054_redacted.png" width="600">
+
+The extracted document contained the hidden information required to complete the challenge.
+
+```
+THM{[redacted]}
+```
+
+---
+
+## 🧠 Methodology Framework Applied
+
+```
+Artifact located
+      ↓
+File signatures inspected
+      ↓
+ZIP archive extracted
+      ↓
+TAR archive extracted
+      ↓
+Compression layers identified
+      ↓
+Nested archives decompressed
+      ↓
+Hidden document recovered
+```
+
+---
+
+## 🛠 Techniques Used
+
+Primary techniques used:
+
+- file signature analysis  
+- archive extraction  
+- compression format identification  
+- layered decompression  
+- document inspection  
+
+Key concept investigated:
+
+```
+Archive forensics
+```
+
+---
+
+## 🛡 Defensive Insight
+
+Attackers often hide malicious payloads or stolen data inside nested archives to evade detection.
+
+Security teams should inspect file signatures rather than relying on extensions and analyze archives for hidden layers.
+
+Defensive strategies include:
+
+- scanning archives for nested content  
+- validating file signatures during uploads  
+- monitoring for unusual archive structures  
+
+These controls help detect hidden or disguised data.
+
+---
+
+## 💡 Skills Reinforced
+
+- Linux archive analysis  
+- File signature identification  
+- Compression and decompression techniques  
+- Multi-layer artifact investigation  
 
 ---
 
 <div align="center">
 
-📦 Archives often hide valuable artifacts  
-🔎 Extract before analyzing  
-🧠 Investigation begins once the files are visible  
+📦 File extensions can hide true formats  
+🔍 File signatures reveal real data structures  
+🧠 Layered archives require methodical extraction  
 
 </div>
