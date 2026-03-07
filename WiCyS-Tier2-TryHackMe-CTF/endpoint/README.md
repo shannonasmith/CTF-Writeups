@@ -1,11 +1,11 @@
 <div align="center">
 
-# 🔎 Endpoint  
-## Web Directory Enumeration & Hidden Resource Discovery
+# 📝 Notepad Online  
+## Authorization Logic Analysis & Direct Object Reference Investigation
 
 ![Category](https://img.shields.io/badge/Category-Web%20Security-orange?style=for-the-badge)
-![Focus](https://img.shields.io/badge/Focus-Endpoint%20Discovery-blue?style=for-the-badge)
-![Method](https://img.shields.io/badge/Method-Directory%20Enumeration-success?style=for-the-badge)
+![Focus](https://img.shields.io/badge/Focus-Authorization%20Control-blue?style=for-the-badge)
+![Method](https://img.shields.io/badge/Method-Parameter%20Manipulation-success?style=for-the-badge)
 
 </div>
 
@@ -13,11 +13,11 @@
 
 ### 🎯 Objective
 
-Investigate a web application suspected of containing hidden resources within its directory structure.
+Investigate a web-based note-taking service that claims user notes are **only visible to the account owner**.
 
-The challenge description suggested that important information may exist in **undocumented endpoints that are not linked from the main interface**.
+The challenge required analyzing how the application retrieves user notes and determining whether access controls were properly enforced.
 
-The goal was to identify hidden resources by performing **web directory enumeration** against the target application.
+The goal was to determine whether **direct object references within the application could expose other users’ data**.
 
 ---
 
@@ -26,104 +26,111 @@ The goal was to identify hidden resources by performing **web directory enumerat
 | Tool | Purpose |
 |-----|------|
 | Web browser | Application interaction |
-| Kali Linux AttackBox | Testing environment |
-| Gobuster | Directory enumeration |
-| Wordlists (dirb/common.txt) | Endpoint discovery |
+| Browser address bar | Parameter manipulation |
+| Manual testing | Authorization validation |
+| Application observation | Access control behavior |
 
 ---
 
-### 📦 Step 1 — Access the Target Application
+### 📦 Step 1 — Access the Notepad Application
 
-The investigation began by opening the provided web application in a browser.
+The investigation began by launching the provided virtual machine and navigating to the web application using the browser.
 
-📸 **Initial Application View**
+The challenge supplied credentials for accessing the service:
 
-<img src="../images/image004.png" width="600">
+```
+User: noel
+Pass: pass1234
+```
 
-At first glance, the interface appeared minimal and did not provide any obvious paths to sensitive information.
+After authentication, the application displayed the user’s personal notes through a simple interface.
 
-Initial hypothesis:
-
-The application likely contained **hidden directories or endpoints not directly linked within the page interface**.
-
----
-
-### 🔍 Step 2 — Perform Directory Enumeration
-
-Since no useful information was immediately visible in the interface, automated directory enumeration was performed.
-
-The **Gobuster** tool was used with a common directory wordlist to search for hidden paths within the web server.
-
-📸 **Directory Enumeration Results**
-
-<img src="../images/image005.png" width="600">
-
-Directory enumeration revealed the presence of an **undocumented endpoint** not accessible through normal navigation.
-
-This indicated that the server hosted additional resources that were not visible through the primary interface.
+Initial observation suggested the application retrieved notes using a **numeric identifier embedded within the page URL**.
 
 ---
 
-### 🧪 Step 3 — Investigate Discovered Endpoint
+### 🔍 Step 2 — Inspect URL Parameters
 
-After identifying the hidden endpoint, the discovered resource was accessed directly through the browser.
+Closer inspection of the browser’s address bar revealed a parameter similar to:
 
-📸 **Hidden Endpoint Access**
+```
+?id=1
+```
 
-<img src="../images/image006.png" width="600">
+This indicated that the application referenced notes using an internal **numeric identifier**.
 
-The endpoint exposed information embedded within the application, confirming that the server hosted content that was **not intended to be easily discoverable through normal browsing**.
+Applications that rely on predictable identifiers can sometimes expose unintended resources if authorization checks are missing.
+
+---
+
+### 🧪 Step 3 — Test Parameter Manipulation
+
+To test whether the application properly restricted access to notes, the identifier value in the URL was manually modified.
+
+The parameter was changed from:
+
+```
+id=1
+```
+
+to
+
+```
+id=0
+```
+
+This simple modification forced the application to retrieve a different internal resource.
 
 ---
 
 #### 🔎 Analytical Observation
 
-Web applications frequently contain hidden resources that:
+This behavior suggested the application was vulnerable to an **Insecure Direct Object Reference (IDOR)**.
 
-- are left over from development
-- exist for administrative purposes
-- contain internal functionality
+IDOR vulnerabilities occur when:
 
-Directory enumeration is a powerful technique because it can reveal **paths that developers assume users will never discover**.
+- internal object identifiers are exposed to the user
+- authorization checks are missing
+- users can access other objects by modifying identifiers
 
----
-
-### 🔄 Step 4 — Analyze Endpoint Response
-
-The response from the discovered endpoint was analyzed to determine whether it exposed any sensitive information.
-
-The returned content contained a message embedded within the application, demonstrating that enumeration had successfully uncovered hidden functionality.
-
-This confirmed that the endpoint served as the location of the challenge artifact.
+Instead of validating whether the authenticated user owned the requested resource, the application simply returned the object referenced by the parameter.
 
 ---
 
-### 🔐 Step 5 — Confirm Information Disclosure
+### 🔄 Step 4 — Analyze Application Response
 
-Once the endpoint was confirmed to contain the relevant information, the investigation verified that the discovery resulted directly from directory enumeration.
+After modifying the identifier, the application responded by displaying a different note stored within the system.
 
-📸 **Successful Endpoint Discovery**
+This confirmed that the application relied entirely on the **numeric identifier provided in the request**, without verifying whether the user was authorized to access the resource.
 
-<img src="../images/image007_redacted.png" width="600">
+---
 
-This demonstrated how hidden resources within web applications can expose sensitive data when enumeration techniques are applied.
+### 🔐 Step 5 — Confirm Unauthorized Data Access
+
+The manipulated request revealed protected information that should not have been accessible to the authenticated user.
+
+📸 **Unauthorized Note Access via Parameter Manipulation**
+
+<img src="../images/image008_redacted.png" width="600">
+
+This demonstrated that the application allowed **unauthorized access to internal data through direct parameter manipulation**, confirming the presence of an IDOR vulnerability.
 
 ---
 
 ## 🧠 Methodology Framework Applied
 
 ```
-Initial application access
+Application login
       ↓
 Interface reconnaissance
       ↓
-Directory enumeration
+URL parameter discovery
       ↓
-Hidden endpoint discovery
+Identifier manipulation
       ↓
-Endpoint inspection
+Unauthorized resource retrieval
       ↓
-Sensitive information located
+Access control weakness confirmed
 ```
 
 ---
@@ -132,56 +139,50 @@ Sensitive information located
 
 Primary techniques used:
 
-- web directory enumeration
-- application reconnaissance
-- endpoint discovery
-- manual endpoint inspection
+- application interface inspection  
+- URL parameter analysis  
+- manual parameter manipulation  
+- authorization testing  
 
 Key concept investigated:
 
 ```
-Hidden web endpoints
+Insecure Direct Object Reference (IDOR)
 ```
 
 ---
 
 ## 🛡 Defensive Insight
 
-Hidden endpoints should never be relied upon as a security mechanism.
+Applications must enforce **server-side authorization checks** whenever resources are requested.
 
-If sensitive functionality exists at a location such as:
+If identifiers are exposed within URLs, the server must verify that the authenticated user is permitted to access the requested object.
 
-```
-/admin
-/debug
-/hidden
-```
+Recommended security practices include:
 
-it **must still be protected through authentication and authorization controls**.
+- validating object ownership on the server  
+- implementing proper access control checks  
+- avoiding predictable sequential identifiers  
+- monitoring for enumeration attempts  
 
-Security best practices include:
-
-- implementing proper access control
-- restricting sensitive directories
-- removing development artifacts before deployment
-- monitoring enumeration activity
+Without proper authorization validation, attackers can iterate through identifiers to access sensitive data belonging to other users.
 
 ---
 
 ## 💡 Skills Reinforced
 
 - Web application reconnaissance  
-- Directory enumeration techniques  
-- Endpoint discovery  
-- Analysis of hidden web resources  
-- Understanding web attack surface exposure  
+- Authorization control analysis  
+- URL parameter manipulation  
+- Identification of IDOR vulnerabilities  
+- Understanding insecure direct object references  
 
 ---
 
 <div align="center">
 
-🔎 Hidden endpoints expand the attack surface  
-🧠 Enumeration reveals undocumented resources  
-🔐 Access control must protect all sensitive paths  
+🔍 Test how applications reference internal objects  
+🧠 Authorization must be enforced server-side  
+🔐 Never trust identifiers supplied by the client  
 
 </div>
