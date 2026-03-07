@@ -28,115 +28,96 @@ This was fundamentally a **static code analysis and logic flaw discovery problem
 | Kali / Ubuntu Linux VM | Investigation environment |
 | Python interpreter | Script execution |
 | Text editor / IDE | Code inspection |
-| Manual input testing | Behavior verification |
+| Manual logic analysis | Understanding program behavior |
 
 ---
 
 ### 📦 Step 1 — Obtain the Source Code
 
-The challenge provided access to a Python script controlling the robot race.
+The challenge provided access to a Python script responsible for simulating a robot race.
 
-The script was downloaded or opened locally for analysis.
-
-📸 **Python Script Provided**
-
-<img src="../images/image24.png" width="800">
+The script was opened locally for inspection and review.
 
 Initial hypothesis:
 
-The solution would likely involve identifying **how the script determines race results** and determining whether the logic could be manipulated.
+The outcome of the race would likely depend on **logic embedded directly in the source code**, meaning that understanding the program flow would reveal how the challenge could be solved.
 
 ---
 
 ### 🔍 Step 2 — Inspect Program Structure
 
-The Python script was reviewed to understand:
+The Python script was reviewed to identify the core components controlling the robot race.
 
-- how the robot race was simulated
-- what variables influenced race outcomes
-- what conditions determined success or failure
+This included examining:
 
-📸 **Initial Code Inspection**
-
-<img src="../images/image25.png" width="800">
-
-Key areas of interest included:
-
+- variable assignments
 - conditional statements
-- input validation logic
-- variables affecting race results
+- race outcome logic
+- input handling
+
+The goal was to determine **how the program decided whether the robot succeeded or failed**.
 
 ---
 
 ### 🧪 Step 3 — Analyze Race Logic
 
-The script contained logic responsible for determining whether the robot succeeded or failed during the race.
+Further inspection revealed conditional logic responsible for determining the outcome of the race.
 
-Example structure observed:
+Example structure:
 
 ```
 if robot_speed > opponent_speed:
     print("You win!")
 ```
 
-This indicated that the race outcome was determined entirely by **variable comparisons within the program logic**.
+This indicated that the race outcome depended entirely on **specific variable values within the script**.
+
+By identifying where these variables were defined and how they were used, it became possible to determine how the success condition could be triggered.
 
 ---
 
 #### 🔎 Analytical Observation
 
-Because the program relied on values defined within the script, it was possible that modifying or manipulating those values could influence the outcome.
+Programs that rely entirely on visible logic can often be reverse engineered through static analysis.
 
-This meant the investigation focused on identifying:
+Because the script was readable, it was possible to:
 
-- where critical variables were defined
-- whether they could be influenced
-- how the success condition was evaluated
+- understand the decision logic
+- identify the success condition
+- determine what values would trigger the winning outcome
 
----
-
-### 🔄 Step 4 — Identify Logic Weakness
-
-Further inspection revealed that the script did not adequately protect the variables controlling race results.
-
-By understanding how the logic worked, it became possible to determine **what values would trigger the success condition**.
-
-📸 **Race Logic Analysis**
-
-<img src="../images/image26.png" width="800">
-
-This confirmed that the application relied on **predictable logic without safeguards**, allowing the correct outcome to be derived through code inspection.
+This meant that solving the challenge required **logic analysis rather than brute-force experimentation**.
 
 ---
 
-### 🔐 Step 5 — Trigger Successful Outcome
+### 🔐 Step 4 — Trigger Successful Outcome
 
-After identifying how the race logic worked, the appropriate input or condition was used to trigger the success branch of the program.
+After identifying how the race logic worked, the correct condition was determined and applied.
 
-📸 **Successful Execution**
+📸 **Successful Program Outcome**
 
-<img src="../images/image27.png" width="800">
+<img src="../images/image39_redacted.png" width="800">
 
-This confirmed that the race outcome could be manipulated by understanding and leveraging the script’s internal logic.
+This confirmed that the race outcome could be influenced by understanding the script’s internal logic and identifying the conditions required for success.
 
 ---
 
 ## 🧠 Methodology Framework Applied
 
 ```
-Program acquisition
+Source code acquisition
       ↓
-Source code inspection
+Program structure inspection
       ↓
 Logic flow analysis
       ↓
-Variable dependency identification
+Conditional evaluation
       ↓
 Success condition discovery
       ↓
 Controlled execution
       ↓
-Successful program outcome
+Successful outcome
 ```
 
 ---
@@ -145,15 +126,15 @@ Successful program outcome
 
 Primary techniques used:
 
-- static code inspection
-- logic flow analysis
-- conditional statement evaluation
-- controlled script execution
+- static source code inspection
+- Python logic analysis
+- conditional evaluation
+- controlled execution testing
 
 Key concept investigated:
 
 ```
-Application logic vulnerabilities
+Application logic vulnerability
 ```
 
 ---
@@ -172,9 +153,9 @@ If application behavior can be predicted entirely from visible logic, attackers 
 
 Secure software design should include safeguards such as:
 
-- server-side validation
-- unpredictable decision logic
-- stronger input validation mechanisms
+- stronger input validation
+- server-side logic enforcement
+- avoidance of predictable success conditions
 
 ---
 
