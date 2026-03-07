@@ -56,7 +56,7 @@ To respect competition integrity:
 ## 🔐 Encoding & Data Transformation
 
 ### **Encoding, Not Encryption**  
-🔎 [View Writeup](./ce01-encoding-not-encryption)
+🔎 [View Writeup](./encoding-not-encryption)
 
 - Identified encoded data within a downloaded artifact  
 - Tested multiple decoding strategies before identifying octal encoding  
@@ -67,7 +67,7 @@ To respect competition integrity:
 ## 🌐 Web Application Security
 
 ### **Hidden Web Content**  
-🔎 [View Writeup](./we01-hidden-web-content)
+🔎 [View Writeup](./hidden-web-content)
 
 - Manual web application enumeration  
 - Source code inspection revealed hidden content not visible in the UI  
@@ -76,7 +76,7 @@ To respect competition integrity:
 ---
 
 ### **Arrays in JavaScript**  
-🔎 [View Writeup](./wm01-arrays-in-javascript)
+🔎 [View Writeup](./arrays-in-javascript)
 
 - JavaScript source analysis to understand client-side validation logic  
 - Identified values stored within arrays controlling application behavior  
@@ -85,7 +85,7 @@ To respect competition integrity:
 ---
 
 ### **Get Admin**  
-🔎 [View Writeup](./we02-get-admin)
+🔎 [View Writeup](./get-admin)
 
 - Browser session and cookie inspection  
 - Identified client-side role storage within session data  
@@ -96,7 +96,7 @@ To respect competition integrity:
 ## 🐍 Code Review
 
 ### **Race My Robot**  
-🔎 [View Writeup](./cr01-race-my-robot)
+🔎 [View Writeup](./race-my-robot)
 
 - Static Python code inspection  
 - Identified logic flaws affecting program behavior  
@@ -107,7 +107,7 @@ To respect competition integrity:
 ## 📄 Digital Forensics & Artifact Analysis
 
 ### **Redacted Artifacts**  
-🔎 [View Writeup](./df01-redacted-artifacts)
+🔎 [View Writeup](./redacted-artifacts)
 
 - Investigated improperly redacted documents  
 - Identified hidden information within layered artifacts  
@@ -116,7 +116,7 @@ To respect competition integrity:
 ---
 
 ### **Hidden Diagram Metadata (.drawio)**  
-🔎 [View Writeup](./df04-hidden-diagram-metadata)
+🔎 [View Writeup](./hidden-diagram-data)
 
 - Investigated a `.drawio.png` network diagram artifact  
 - Identified embedded diagram metadata within the image file  
@@ -127,7 +127,7 @@ To respect competition integrity:
 ## 🪟 Windows Incident Investigation
 
 ### **Unwanted Visitor**  
-🔎 [View Writeup](./df02-unwanted-visitor)
+🔎 [View Writeup](./unwanted-visitor)
 
 - Investigated authentication activity using **Security.evtx logs**  
 - Identified attacker workstation via **Event ID 4624 logon records**  
@@ -136,7 +136,7 @@ To respect competition integrity:
 ---
 
 ### **Hidden Backdoor User (ROT13)**  
-🔎 [View Writeup](./df02-hidden-backdoor-user)
+🔎 [View Writeup](./hidden-backdoor-user)
 
 - Investigated PowerShell script block logs  
 - Identified attacker persistence via scheduled task creation  
