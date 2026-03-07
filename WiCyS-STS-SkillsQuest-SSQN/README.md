@@ -1,10 +1,10 @@
 <div align="center">
 
 # 🛰 WiCyS STS Tier 2 — SkillsQuest CTF
-## Threat Actor Investigation & MITRE ATT&CK Analysis
+## Threat Investigation, System Analysis & MITRE ATT&CK Mapping
 
 ![Event](https://img.shields.io/badge/Event-WiCyS%20STS%20Tier%202-purple?style=for-the-badge)
-![Focus](https://img.shields.io/badge/Focus-Threat%20Hunting-blue?style=for-the-badge)
+![Focus](https://img.shields.io/badge/Focus-Threat%20Investigation-blue?style=for-the-badge)
 ![Framework](https://img.shields.io/badge/Framework-MITRE%20ATT%26CK-red?style=for-the-badge)
 
 </div>
@@ -13,18 +13,18 @@
 
 ## 🎯 Objective
 
-The **SkillsQuest CTF** focused on analyzing attacker behavior through a threat-intelligence scenario.
+The **WiCyS Security Training Scholarship (STS) Tier 2 SkillsQuest CTF** focused on developing practical skills in **system investigation, threat analysis, and incident response techniques**.
 
-Participants were tasked with identifying attacker techniques, understanding adversary behavior patterns, and mapping activity to the **MITRE ATT&CK framework**.
+Participants analyzed multiple simulated environments including:
 
-The exercise simulated real-world incident investigation where defenders must determine:
+- Linux systems
+- Windows hosts
+- enterprise log environments
+- running malware processes
 
-- attacker objectives
-- tactics used
-- infrastructure leveraged
-- methods of persistence and exfiltration
+Rather than isolated puzzles, the competition emphasized **realistic investigative workflows** similar to those used by security analysts and threat hunters.
 
-Rather than isolated puzzles, this competition emphasized **holistic threat analysis**.
+The challenges required identifying attacker activity, investigating suspicious artifacts, and understanding how attacks progress across systems.
 
 ---
 
@@ -32,67 +32,136 @@ Rather than isolated puzzles, this competition emphasized **holistic threat anal
 
 | Skill | Description |
 |------|------|
-| Threat Actor Profiling | Identifying adversary groups based on behavioral patterns |
-| MITRE ATT&CK Mapping | Mapping activity to known adversary tactics |
-| Incident Investigation | Following attacker activity through multiple phases |
-| Log Analysis | Identifying suspicious activity within system artifacts |
-| Attack Lifecycle Analysis | Understanding how attacks progress across stages |
+| System Investigation | Investigating Linux and Windows hosts for suspicious activity |
+| Threat Hunting | Searching logs and system artifacts for indicators of compromise |
+| SIEM Analysis | Investigating attack activity through ELK log analysis |
+| Persistence Detection | Identifying attacker footholds within operating systems |
+| Binary & Process Analysis | Investigating suspicious processes and malware behavior |
+| Privilege Escalation Analysis | Understanding system misconfigurations enabling escalation |
+| MITRE ATT&CK Mapping | Relating attacker actions to known adversary techniques |
 
 ---
 
-## 🧭 Threat Actor Analysis
+## 🧩 Challenge Environments
 
-The investigation compared several simulated adversary groups including:
+The SkillsQuest competition included several investigative environments.
 
-- **Ethereal Treasure**
-- **Nuclear Tangerine**
-- **Black Lotus**
-- **Moriarty**
-- **Reichenbach**
+### 🐧 Linux Labyrinth
 
-Each group demonstrated different tactics across the attack lifecycle.
+Focused on **Linux command-line investigation and system enumeration**.
 
-Analysis required identifying which techniques aligned with specific attacker behavior.
+Skills practiced:
+
+- file system navigation
+- command-line searching
+- HTTP interaction from the terminal
+- process and service inspection
+- metadata extraction
 
 ---
 
-## 🧩 Attack Lifecycle Observed
+### 🪟 Windows Basics
 
-The investigation followed the typical cyber intrusion lifecycle:
+Focused on **Windows host investigation using PowerShell and system utilities**.
+
+Skills practiced:
+
+- service inspection
+- registry analysis
+- user directory investigation
+- process enumeration
+- network port discovery
+
+---
+
+### 📊 ELK SIEM Log Analysis
+
+Simulated a **network intrusion investigation** using the ELK stack.
+
+Participants analyzed logs to:
+
+- identify phishing activity
+- trace attacker behavior across hosts
+- investigate process creation events
+- identify persistence and lateral movement
+- reconstruct an attack timeline
+
+---
+
+### 🧩 Windows Persistence
+
+Focused on identifying **multiple persistence mechanisms used by malware**.
+
+Investigated techniques included:
+
+- registry run keys
+- scheduled tasks
+- Windows services
+- startup folder execution
+- WMI persistence
+
+---
+
+### 🧬 Linux Binary Analysis
+
+Focused on analyzing a **suspicious binary running on a Linux system**.
+
+Skills practiced:
+
+- process enumeration
+- memory artifact extraction
+- binary interaction
+- network connection monitoring
+- malware behavior investigation
+
+---
+
+### 🧠 Privilege Escalation & Lateral Movement
+
+A multi-user Linux environment simulating **privilege escalation and lateral movement scenarios**.
+
+Skills practiced:
+
+- credential discovery
+- command injection exploitation
+- file permission analysis
+- environment manipulation
+- user account pivoting
+
+---
+
+## 🧭 Attack Lifecycle Analysis
+
+Across the challenges, investigations followed common phases of a cyber intrusion lifecycle:
 
 | Phase | Example Techniques |
 |------|------|
-| Reconnaissance | active scanning, victim organization research |
-| Resource Development | infrastructure acquisition, domain creation |
-| Initial Access | phishing campaigns, valid credential abuse |
-| Execution | PowerShell, command interpreter usage |
-| Persistence | scheduled tasks, account manipulation |
-| Privilege Escalation | credential theft and abuse |
-| Defense Evasion | log deletion, timestomping |
-| Credential Access | password spraying and cracking |
-| Discovery | account and network enumeration |
-| Lateral Movement | internal spearphishing |
-| Command & Control | web protocols and remote access |
-| Exfiltration | data transfer over alternative channels |
+| Reconnaissance | system enumeration |
+| Initial Access | phishing and credential discovery |
+| Execution | command interpreter activity |
+| Persistence | scheduled tasks and service manipulation |
+| Privilege Escalation | abuse of system permissions |
+| Discovery | host and network enumeration |
+| Lateral Movement | account pivoting across systems |
+| Command & Control | network connections from malware |
+| Exfiltration | attacker data transfer |
 
 ---
 
 ## 🛠 Tools & Techniques Used
 
-<img src="https://img.icons8.com/color/48/windows-10.png" width="25"/> Windows Event Logs  
-<img src="https://img.icons8.com/color/48/linux.png" width="25"/> Linux systems  
-<img src="https://img.icons8.com/color/48/python.png" width="25"/> Python scripting  
-<img src="https://img.icons8.com/color/48/network.png" width="25"/> network traffic analysis  
+<img src="https://img.icons8.com/color/48/linux.png" width="25"/> Linux command line  
+<img src="https://img.icons8.com/color/48/windows-10.png" width="25"/> Windows PowerShell  
+<img src="https://img.icons8.com/color/48/network.png" width="25"/> network investigation  
+<img src="https://img.icons8.com/color/48/database.png" width="25"/> ELK SIEM log analysis  
 
-</div>
-
-
-Additional techniques included:
+Additional investigative techniques included:
 
 - event log investigation
-- attacker behavioral comparison
-- attack lifecycle reconstruction
-- adversary technique attribution
+- system artifact analysis
+- process inspection
+- network connection monitoring
+- privilege escalation analysis
 
 ---
 
@@ -108,24 +177,24 @@ Additional techniques included:
 | T1110 | Brute Force |
 | T1046 | Network Service Discovery |
 | T1040 | Network Sniffing |
-| T1041 | Exfiltration Over C2 Channel |
+| T1041 | Exfiltration Over Command & Control |
 
 ---
 
 ## 💡 Key Lessons Learned
 
-- Attackers rarely rely on a single technique
-- Attribution requires pattern recognition across multiple tactics
-- Understanding the attack lifecycle is critical for defenders
-- MITRE ATT&CK provides a useful framework for organizing investigations
-- Threat hunting requires both technical analysis and behavioral reasoning
+- System artifacts provide valuable insight into attacker activity  
+- Log correlation enables reconstruction of complex intrusion timelines  
+- Persistence mechanisms often hide within legitimate system components  
+- Binary processes can reveal forensic artifacts even after deletion  
+- Threat investigations require both technical analysis and behavioral reasoning  
 
 ---
 
 <div align="center">
 
 🛰 Investigating attacker behavior  
-🧠 Mapping adversary tactics  
+🧠 Mapping adversary techniques  
 🛡 Strengthening defensive analysis
 
 </div>
