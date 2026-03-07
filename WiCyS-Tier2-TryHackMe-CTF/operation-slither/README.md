@@ -1,11 +1,11 @@
 <div align="center">
 
 # 🐍 Operation Slither 1  
-## Linux Command-Line Investigation & Hidden File Discovery
+## OSINT Investigation & Encoded Message Analysis
 
-![Category](https://img.shields.io/badge/Category-Linux-orange?style=for-the-badge)
-![Focus](https://img.shields.io/badge/Focus-File%20Discovery-blue?style=for-the-badge)
-![Method](https://img.shields.io/badge/Method-Command%20Line%20Investigation-success?style=for-the-badge)
+![Category](https://img.shields.io/badge/Category-OSINT-orange?style=for-the-badge)
+![Focus](https://img.shields.io/badge/Focus-Social%20Media%20Investigation-blue?style=for-the-badge)
+![Method](https://img.shields.io/badge/Method-Data%20Decoding-success?style=for-the-badge)
 
 </div>
 
@@ -13,11 +13,11 @@
 
 ### 🎯 Objective
 
-Investigate a Linux system to locate hidden information within the filesystem.
+Investigate the online presence of a suspected threat actor in order to identify information about the leader of the **Sneaky Viper** group.
 
-The challenge required using Linux command-line tools to search for files and identify data that had been intentionally hidden.
+The challenge suggested that the attacker had begun leaking information online after gaining access to an organization's network.
 
-The objective was to perform **filesystem reconnaissance** and recover the hidden information.
+The objective was to perform **open-source intelligence (OSINT) analysis** on the attacker’s social media activity and recover hidden information from their posts.
 
 ---
 
@@ -25,108 +25,100 @@ The objective was to perform **filesystem reconnaissance** and recover the hidde
 
 | Tool | Purpose |
 |-----|------|
-| Kali Linux AttackBox | Investigation environment |
-| Linux terminal | Command execution |
-| `ls` | Directory inspection |
-| `find` | File discovery |
-| `cat` | File content inspection |
+| Web browser | OSINT investigation |
+| Social media platforms | Investigate attacker activity |
+| CyberChef | Decode hidden data |
+| Manual analysis | Identify encoded information |
 
 ---
 
-### 📦 Step 1 — Begin Filesystem Investigation
+### 📦 Step 1 — Identify the Threat Actor
 
-The investigation began by examining the working directory to determine what files were present.
+The message associated with the leak referenced a user named:
 
-```bash
-ls
+```
+@v3n0mbyt3_
 ```
 
-Initial inspection showed a minimal set of visible files.
+This username appeared to belong to the individual responsible for posting about the data breach.
 
-Because challenges like this often hide information in unexpected locations, deeper exploration of the filesystem was required.
+The next step was to investigate the user’s public activity online.
 
 ---
 
-### 🔍 Step 2 — Search for Hidden Files
+### 🔍 Step 2 — Investigate the Social Media Account
 
-Hidden files in Linux typically begin with a dot (`.`) and may not appear in standard directory listings.
+Searching for the username revealed a social media account associated with the threat actor.
 
-To reveal hidden files, the following command was used:
+Further inspection showed that the account had posted several messages related to the leak.
 
-```bash
-ls -la
-```
-
-This command displays all files, including hidden entries and directory metadata.
-
-However, further investigation suggested that the target file might be located deeper within the filesystem.
+Investigators often examine attacker social media activity because threat actors sometimes reveal clues unintentionally.
 
 ---
 
-### 🧪 Step 3 — Locate the Target File
+### 🧪 Step 3 — Inspect Account Replies
 
-To search for files across the system, the `find` command was used.
+The replies associated with the account were reviewed to determine whether they contained additional information.
 
-```bash
-find / -type f 2>/dev/null
-```
+The replies could be accessed through the user's Threads page.
 
-This command recursively searches the filesystem for files while suppressing permission errors.
-
-📸 **Filesystem Search Results**
+📸 **Threat Actor Account Activity**
 
 <img src="../images/image047.png" width="600">
 
-The search results revealed a file of interest that appeared to contain the hidden information.
+One of the replies contained text that appeared to be **encoded data**, suggesting that the attacker had hidden a message within the post.
 
 ---
 
 #### 🔎 Analytical Observation
 
-Linux systems provide powerful command-line utilities that allow investigators to search large filesystems efficiently.
+Threat actors sometimes hide information inside encoded messages posted publicly.
 
-Commands such as `find`, `grep`, and `ls` are frequently used in forensic investigations to locate hidden or suspicious files.
+Common encoding techniques include:
 
-These tools allow analysts to quickly identify artifacts that may otherwise remain unnoticed.
+- Base64
+- hexadecimal encoding
+- URL encoding
+- custom obfuscation
 
----
-
-### 🔄 Step 4 — Inspect the File Contents
-
-After identifying the suspicious file, the next step was to inspect its contents.
-
-```bash
-cat filename
-```
-
-This command prints the contents of the file directly to the terminal, allowing investigators to determine whether it contains relevant information.
+These techniques allow attackers to hide information in plain sight.
 
 ---
 
-### 🔐 Step 5 — Confirm Successful Recovery
+### 🔄 Step 4 — Extract the Encoded Message
 
-Opening the discovered file revealed the information required to complete the challenge.
+The encoded text from the post was copied and analyzed to determine what type of encoding was used.
 
-📸 **Recovered Hidden Data**
+Because encoded messages often follow recognizable patterns, decoding tools can be used to reveal the hidden content.
+
+---
+
+### 🔐 Step 5 — Decode the Message
+
+The extracted text was placed into **CyberChef** for analysis.
+
+CyberChef allows investigators to quickly test decoding techniques and identify hidden data.
+
+📸 **Decoded Message Output**
 
 <img src="../images/image048_redacted.png" width="600">
 
-This confirmed that the hidden information had been successfully located through command-line filesystem investigation.
+The decoded output revealed the hidden information associated with the Sneaky Viper group.
 
 ---
 
 ## 🧠 Methodology Framework Applied
 
 ```
-Filesystem inspected
+Threat actor identified
       ↓
-Hidden files revealed
+Social media investigation performed
       ↓
-Recursive file search performed
+Suspicious reply discovered
       ↓
-Suspicious file identified
+Encoded message extracted
       ↓
-File contents inspected
+Data decoded
       ↓
 Hidden information recovered
 ```
@@ -137,48 +129,46 @@ Hidden information recovered
 
 Primary techniques used:
 
-- filesystem reconnaissance  
-- hidden file discovery  
-- recursive file search  
-- command-line file inspection  
+- OSINT investigation  
+- social media analysis  
+- encoded message identification  
+- CyberChef decoding  
 
 Key concept investigated:
 
 ```
-Linux filesystem investigation
+Encoded data in public posts
 ```
 
 ---
 
 ## 🛡 Defensive Insight
 
-Attackers and administrators alike may hide files within a system’s filesystem.
+Threat actors sometimes use public platforms to distribute encoded messages or communicate indirectly.
 
-Linux provides powerful command-line tools that can uncover hidden files and artifacts.
+Security teams should monitor public sources for:
 
-Security teams should regularly audit systems using tools that can:
+- suspicious user activity  
+- encoded messages  
+- leaked organizational data  
 
-- identify hidden files  
-- locate suspicious artifacts  
-- monitor unauthorized filesystem changes  
-
-Routine filesystem monitoring can help detect unauthorized activity.
+OSINT monitoring can provide early indicators of ongoing attacks or data leaks.
 
 ---
 
 ## 💡 Skills Reinforced
 
-- Linux command-line investigation  
-- Filesystem enumeration  
-- Hidden file discovery  
-- Command-line forensic analysis  
+- OSINT investigation  
+- Social media intelligence gathering  
+- Encoded message identification  
+- Data decoding techniques  
 
 ---
 
 <div align="center">
 
-🐍 Hidden files often contain valuable clues  
-🔍 Linux command-line tools enable deep system inspection  
-🧠 Filesystem analysis is essential for forensic investigations  
+🐍 Threat actors often leave clues online  
+🔍 OSINT investigations reveal hidden activity  
+🧠 Encoded messages can hide sensitive information  
 
 </div>
