@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🧠 CTF Writeups
+# 🚩 CTF Writeups 🚩
 
 ### Cybersecurity Investigation Portfolio
 
