@@ -11,115 +11,144 @@
 
 ---
 
-## 🎯 Objective
+### 🎯 Objective
 
-Analyze a web application that executes a system command and determine whether user input can influence the command being run.
+Analyze a PHP web application and determine whether user input can influence the system commands executed by the server.
 
-The goal was to identify whether the application improperly incorporated user input into a shell command, creating the possibility of **command injection**.
+The challenge involved interacting with a simple web interface and identifying whether backend command execution could be manipulated through crafted input.
 
-This challenge focused on understanding how backend systems execute commands and how improper input handling can expose system-level functionality.
-
----
-
-## 🖥 Environment
-
-- Web browser  
-- Command injection payload testing  
-- Basic Linux command knowledge  
-- Input manipulation techniques  
+The goal was to determine if the application was vulnerable to **command injection**, allowing an attacker to execute arbitrary shell commands.
 
 ---
 
-## 🔍 Step 1 — Observe Application Behavior
+### 🖥 Environment
 
-The investigation began by interacting with the web application and submitting different inputs through the provided interface.
-
-The application appeared to take user input and produce a response based on that input.
-
-Initial observations suggested that the application might be passing the input to a backend system command.
-
----
-
-## 🔎 Step 2 — Identify Potential Command Execution
-
-Applications that generate system responses based on input sometimes rely on command-line utilities behind the scenes.
-
-Indicators that command execution may be occurring include:
-
-- predictable command-like responses
-- structured output resembling terminal output
-- behavior consistent with system utilities
-
-These patterns suggested that user input might be incorporated into a shell command.
+| Tool | Purpose |
+|-----|------|
+| Web Browser | Interaction with the target application |
+| Kali Linux | Investigation environment |
+| Basic Linux Commands | Directory enumeration and file inspection |
+| Command Injection | Manipulating backend command execution |
 
 ---
 
-## 🔄 Step 3 — Test for Injection Behavior
+### 📦 Step 1 — Access the Application
 
-To test this hypothesis, input was modified using characters commonly used to chain or separate commands in shell environments.
+After starting the challenge machine, the target web application was accessed through the provided IP address.
 
-Examples of such operators include:
+```
+http://10.10.x.x
+```
 
-- command separators
-- logical operators
-- shell control characters
+The page contained a simple form that accepted user input and returned a response.
 
-If the application fails to sanitize these characters, additional commands may execute after the intended command.
-
----
-
-## 🔐 Step 4 — Confirm Command Injection
-
-Testing revealed that carefully crafted input could influence how the backend command executed.
-
-This confirmed that the application did not properly sanitize user input before passing it to the system shell.
-
-As a result, it was possible to alter command execution behavior through injected input.
-
-This behavior demonstrated a **command injection vulnerability**.
+Given the nature of the challenge description, the next step was to determine whether the input field interacted with system commands on the backend.
 
 ---
 
-# 🧠 Methodology Framework Applied
+### 🔍 Step 2 — Test Command Injection
 
-1. Observe application functionality  
-2. Identify patterns suggesting system command usage  
-3. Test input boundaries and special characters  
-4. Attempt command chaining techniques  
-5. Observe system response behavior  
-6. Confirm command execution manipulation  
+To determine whether the input field was vulnerable to command injection, a command substitution payload was entered into the form:
+
+```bash
+$(ls)
+```
+
+If the application executed the input within a shell context, this command would return a directory listing.
+
+📸 **Server Directory Listing**
+
+<img src="../images/image012_redacted.png" width="400">
+
+The response revealed several server-side files:
+
+```
+css
+flag-[redacted].txt
+index.php
+js
+```
+
+The presence of the flag file confirmed that **the application was executing user input as part of a shell command**.
 
 ---
 
-# 🛡 Defensive Insight
+### 🔄 Step 3 — Retrieve the Target File
 
-Command injection vulnerabilities occur when user input is incorporated directly into system commands without proper validation.
+After identifying the flag file from the directory listing, the next step was to read its contents.
 
-Secure design requires:
+The following command injection payload was submitted:
 
-- strict input validation  
-- avoidance of direct shell command construction  
-- use of safe APIs instead of shell calls  
-- input sanitization and command parameterization  
+```bash
+$(cat flag-[redacted].txt)
+```
 
-Allowing user input to control system commands can lead to **remote code execution and full system compromise**.
+📸 **File Contents Retrieved**
+
+<img src="../images/image013_redacted.png" width="400">
+
+The server executed the injected command and returned the contents of the file in the HTTP response, confirming that arbitrary commands could be executed through the vulnerable input field.
 
 ---
 
-# 💡 Skills Reinforced
+## 🧠 Methodology Framework Applied
+
+```
+Web application access
+      ↓
+Input field testing
+      ↓
+Command substitution payload
+      ↓
+Directory enumeration
+      ↓
+File discovery
+      ↓
+Command execution to retrieve contents
+```
+
+---
+
+## 🛠 Commands Used
+
+```bash
+$(ls)
+$(cat flag-[redacted].txt)
+```
+
+These payloads leveraged shell command substitution to execute system commands through the web application's backend.
+
+---
+
+## 🛡 Defensive Insight
+
+Command injection vulnerabilities occur when applications execute user-supplied input within system commands without proper sanitization.
+
+Secure development practices include:
+
+- validating user input
+- sanitizing special characters
+- avoiding direct shell execution
+- using parameterized command execution methods
+
+Without proper input validation, attackers may execute arbitrary system commands and potentially gain full system access.
+
+---
+
+## 💡 Skills Reinforced
 
 - Web application vulnerability analysis  
-- Command injection detection techniques  
-- Shell behavior understanding  
-- Input sanitization assessment  
-- Backend command execution analysis  
+- Command injection detection  
+- Server-side command execution behavior  
+- Directory enumeration through shell commands  
+- Input validation awareness  
 
 ---
 
 <div align="center">
 
-🐄 Input should never control system commands  
-🔎 Observe how applications process special characters  
-🧠 Validate input before passing it to the shell  
+🐄 Never trust user input  
+🔎 Test how applications process shell characters  
+🧠 Command injection can expose entire systems  
 
 </div>
