@@ -48,7 +48,7 @@ Given the nature of the challenge description, the next step was to determine wh
 
 ### 🔍 Step 2 — Test Command Injection
 
-To determine whether the input field was vulnerable to command injection, a command substitution payload was entered into the form:
+To determine whether the input field was vulnerable to command injection, a command substitution payload was entered into the form.
 
 ```bash
 $(ls)
@@ -73,7 +73,7 @@ The presence of the flag file confirmed that **the application was executing use
 
 ---
 
-### 🔄 Step 3 — Retrieve the Target File
+### 🧪 Step 3 — Retrieve the Target File
 
 After identifying the flag file from the directory listing, the next step was to read its contents.
 
@@ -88,6 +88,28 @@ $(cat flag-[redacted].txt)
 <img src="../images/image013_redacted.png" width="600">
 
 The server executed the injected command and returned the contents of the file in the HTTP response, confirming that arbitrary commands could be executed through the vulnerable input field.
+
+---
+
+#### 🔎 Analytical Observation
+
+Command injection vulnerabilities occur when applications pass user input directly into system commands without proper validation.
+
+Attackers can exploit this behavior by inserting shell commands using techniques such as:
+
+- command substitution
+- command chaining
+- shell metacharacters
+
+This allows attackers to interact directly with the underlying operating system.
+
+---
+
+### 🔐 Step 4 — Confirm Command Execution
+
+The successful execution of both injected commands demonstrated that the application failed to sanitize user input before passing it to the system shell.
+
+This confirmed that the application was vulnerable to **command injection**, allowing attackers to execute arbitrary system commands on the server.
 
 ---
 
@@ -109,14 +131,20 @@ Command execution to retrieve contents
 
 ---
 
-## 🛠 Commands Used
+## 🛠 Techniques Used
 
-```bash
-$(ls)
-$(cat flag-[redacted].txt)
+Primary techniques used:
+
+- command injection testing  
+- shell command substitution  
+- server-side file enumeration  
+- input validation analysis  
+
+Key concept investigated:
+
 ```
-
-These payloads leveraged shell command substitution to execute system commands through the web application's backend.
+Command Injection
+```
 
 ---
 
@@ -127,7 +155,7 @@ Command injection vulnerabilities occur when applications execute user-supplied 
 Secure development practices include:
 
 - validating user input  
-- sanitizing special characters  
+- sanitizing shell metacharacters  
 - avoiding direct shell execution  
 - using parameterized command execution methods  
 
