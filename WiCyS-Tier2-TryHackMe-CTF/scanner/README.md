@@ -1,11 +1,11 @@
 <div align="center">
 
 # 📡 Scanner  
-## Service Discovery & Unusual Port Analysis
+## Service Discovery & Non-Standard Port Analysis
 
 ![Category](https://img.shields.io/badge/Category-Network%20Security-orange?style=for-the-badge)
 ![Focus](https://img.shields.io/badge/Focus-Service%20Discovery-blue?style=for-the-badge)
-![Method](https://img.shields.io/badge/Method-Port%20Analysis-success?style=for-the-badge)
+![Method](https://img.shields.io/badge/Method-Port%20Scanning-success?style=for-the-badge)
 
 </div>
 
@@ -13,11 +13,11 @@
 
 ### 🎯 Objective
 
-Investigate a mysterious signal originating from a remote system and determine whether the service reveals hidden information.
+Investigate a remote system suspected of exposing a hidden service.
 
-The challenge description suggested that the system exposed a service but provided limited opportunities to discover it.
+The challenge hinted that the service might not be running on a typical web port, requiring deeper network enumeration to identify its location.
 
-The objective was to perform **network scanning and service interrogation** to determine whether the host exposed any accessible resources.
+The goal was to perform **targeted port scanning and service interrogation** to determine whether the system exposed hidden resources.
 
 ---
 
@@ -32,94 +32,86 @@ The objective was to perform **network scanning and service interrogation** to d
 
 ---
 
-### 📦 Step 1 — Perform Initial Service Discovery
+### 📦 Step 1 — Identify the Target System
 
-The investigation began by scanning the target host to identify available services.
+The investigation began by identifying the target machine provided by the challenge environment.
 
-Because the challenge hinted at a hidden signal, a targeted scan was performed against a specific port using Nmap.
-
-The scan included the **http-headers script** to identify whether the service returned HTTP metadata.
+The next step was to determine whether any services were exposed on unusual or unexpected ports.
 
 ---
 
-### 🔍 Step 2 — Analyze Nmap Script Output
+### 🔍 Step 2 — Perform Targeted Port Scan
 
-The Nmap scan revealed that the target system responded to requests on an **unusual port**.
+To identify whether the host exposed an HTTP service on a hidden port, a targeted scan was performed using Nmap.
 
-Rather than using a typical web port such as:
-
-```
-80
-443
-8080
+```bash
+nmap --script=http-headers -p 1 TARGET_IP
 ```
 
-the service responded on **port 1**, which is rarely used for web applications.
+This command scans **port 1** and attempts to retrieve HTTP headers if the service responds as a web server.
 
-This unusual configuration suggested that the challenge intentionally hid the service on a **non-standard port** to make discovery more difficult.
+The scan results indicated that the host responded to HTTP requests on **port 1**, which is highly unusual for a web service.
 
 ---
 
 ### 🧪 Step 3 — Interact with the Service
 
-After confirming that the port responded to HTTP requests, the next step was to manually interact with the service using `curl`.
+After discovering that port 1 responded to HTTP requests, the next step was to manually inspect the service response.
 
-This allowed the response body to be retrieved directly from the server.
-
-```
+```bash
 curl TARGET_IP:1
 ```
 
-The server returned an HTTP response containing embedded information.
+This command sends a direct HTTP request to the discovered service and returns the server's response.
 
 ---
 
 #### 🔎 Analytical Observation
 
-Security testing often involves investigating **non-standard ports** because services may run outside their expected locations.
+Services running on non-standard ports are often overlooked during casual inspections.
 
-Attackers frequently discover exposed services by scanning the entire port range and identifying unusual responses.
+Attackers frequently discover exposed services by performing **comprehensive port scans** and manually inspecting responses from unexpected ports.
 
-This challenge demonstrates how **services running on uncommon ports can still expose sensitive information**.
-
----
-
-### 🔄 Step 4 — Analyze the HTTP Response
-
-The HTTP response returned by the server contained embedded data that was not visible without directly interacting with the service.
-
-Because the service was hosted on an unusual port, it would likely be overlooked during casual inspection.
-
-This emphasizes the importance of **comprehensive service enumeration during reconnaissance**.
+This challenge demonstrates that sensitive information may still be accessible even when services are hosted on uncommon ports.
 
 ---
 
-### 🔐 Step 5 — Confirm Exposed Information
+### 🔄 Step 4 — Inspect the HTTP Response
 
-The response from the service confirmed that the system exposed sensitive information through the HTTP response.
+The server returned a response containing embedded information that was not visible through normal browsing.
 
-📸 **Service Response from Unusual Port**
+Because the service was hosted on a non-standard port, it required deliberate enumeration to discover.
+
+This highlights the importance of **thorough service discovery during reconnaissance**.
+
+---
+
+### 🔐 Step 5 — Confirm Hidden Service Discovery
+
+The retrieved HTTP response contained the information required to complete the challenge.
+
+📸 **HTTP Response from Non-Standard Port**
 
 <img src="../images/image009_redacted.png" width="600">
 
-This confirmed that the service hosted on the unexpected port contained the information required to complete the investigation.
+This confirmed that the hidden service was accessible once the correct port had been identified and manually queried.
 
 ---
 
 ## 🧠 Methodology Framework Applied
 
 ```
-Target identification
+Target system identified
       ↓
-Port scanning
+Port scanning performed
       ↓
-Service detection
+Service discovered on unusual port
       ↓
 Manual HTTP interrogation
       ↓
 Response analysis
       ↓
-Sensitive information discovery
+Hidden information retrieved
 ```
 
 ---
@@ -129,9 +121,9 @@ Sensitive information discovery
 Primary techniques used:
 
 - network port scanning  
-- service detection  
-- HTTP header analysis  
-- manual service interaction  
+- service discovery  
+- HTTP response analysis  
+- manual service interrogation  
 
 Key concept investigated:
 
@@ -143,17 +135,17 @@ Non-standard service ports
 
 ## 🛡 Defensive Insight
 
-Services running on unusual ports are not inherently secure.
+Running services on unusual ports does not provide meaningful security.
 
-Security through obscurity can delay discovery but does not prevent attackers from identifying exposed services through systematic scanning.
+Attackers can discover hidden services through automated scanning tools.
 
 Organizations should ensure that:
 
-- only necessary services are exposed
-- firewall rules restrict unnecessary ports
-- network monitoring detects unusual service behavior
+- unnecessary services are disabled  
+- firewall rules restrict exposed ports  
+- network monitoring detects unusual service activity  
 
-Proper service management reduces the attack surface of exposed infrastructure.
+Security should rely on **proper access control and service hardening**, not obscurity.
 
 ---
 
@@ -162,7 +154,7 @@ Proper service management reduces the attack surface of exposed infrastructure.
 - Network reconnaissance  
 - Port scanning methodology  
 - Service discovery techniques  
-- HTTP response analysis  
+- HTTP response inspection  
 - Identifying services running on non-standard ports  
 
 ---
@@ -170,7 +162,7 @@ Proper service management reduces the attack surface of exposed infrastructure.
 <div align="center">
 
 📡 Scan beyond common ports  
-🔍 Unusual services may hide sensitive data  
-🧠 Enumeration is the foundation of security testing  
+🔍 Hidden services may expose sensitive data  
+🧠 Enumeration is the foundation of network security testing  
 
 </div>
