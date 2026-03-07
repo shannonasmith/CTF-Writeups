@@ -6,7 +6,7 @@ Hands-on cybersecurity investigations across **web exploitation, DFIR, cryptogra
 
 <br>
 
-<img src="images/cyber-study.png" width="650"/>
+<img src="images/cyber-study.png" width="250"/>
 
 <br><br>
 
