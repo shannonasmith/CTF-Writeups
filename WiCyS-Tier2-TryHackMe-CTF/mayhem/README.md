@@ -29,7 +29,7 @@ The investigation focused on identifying encrypted attacker communications and r
 | `wget` | Retrieve forensic evidence |
 | `unzip` | Extract artifacts |
 | Wireshark | Network traffic analysis |
-| Manual analysis | C2 traffic investigation |
+| Terminal | Command execution and analysis |
 
 ---
 
@@ -41,36 +41,57 @@ The investigation began by downloading the evidence archive from the provided lo
 wget http://10.10.133.71/evidence.zip
 ```
 
-The archive contained artifacts related to the attacker’s activity.
+After downloading the archive, the working directory was inspected to identify the available artifacts.
 
-The archive was extracted to begin the analysis.
+```bash
+ls
+```
+
+📸 **Forensic Artifacts Provided**
+
+<img src="../images/image046.png" width="600">
+
+The directory contained several files relevant to the investigation, including:
+
+- `evidence.zip` — archive containing investigation artifacts  
+- `traffic.pcapng` — packet capture of attacker activity  
+
+These files served as the starting point for reconstructing the attacker’s actions.
+
+---
+
+### 🔍 Step 2 — Extract the Investigation Artifacts
+
+The evidence archive was extracted to reveal the files contained inside.
 
 ```bash
 unzip evidence.zip
 ```
 
----
+Digital forensic investigations typically begin by reviewing all available artifacts to determine which files contain relevant evidence.
 
-### 🔍 Step 2 — Inspect the Investigation Artifacts
+Artifacts often include:
 
-After extraction, the files were reviewed to determine which artifacts contained relevant evidence.
+- packet captures  
+- logs  
+- attacker tools  
+- suspicious files  
 
-Digital forensic investigations often begin by identifying:
-
-- packet captures
-- system logs
-- attacker tools
-- suspicious files
-
-These artifacts help reconstruct attacker activity.
+These artifacts help investigators reconstruct attacker activity.
 
 ---
 
-### 🧪 Step 3 — Identify Attacker Communication
+### 🧪 Step 3 — Analyze Network Traffic
 
-Analysis of the artifacts revealed evidence of **command-and-control communication** associated with the attacker.
+The packet capture was opened using Wireshark to analyze the network activity recorded during the attack.
 
-The communication appeared to be encrypted, indicating that the attacker was using a secure channel to communicate with their infrastructure.
+```bash
+wireshark traffic.pcapng
+```
+
+Packet captures allow investigators to inspect communications between systems and identify suspicious activity.
+
+During analysis, encrypted traffic associated with attacker communication was identified.
 
 Further investigation revealed that the attacker was using **Havoc C2**, a red-team command-and-control framework.
 
@@ -78,9 +99,9 @@ Further investigation revealed that the attacker was using **Havoc C2**, a red-t
 
 #### 🔎 Analytical Observation
 
-Command-and-control frameworks often encrypt their traffic to prevent defenders from easily identifying attacker commands.
+Command-and-control frameworks commonly encrypt their communications to prevent defenders from easily reading attacker commands.
 
-However, forensic analysis can sometimes recover the **encryption parameters used by the attacker**, allowing investigators to decrypt captured communications.
+However, forensic analysis can sometimes reveal the **encryption parameters used by the attacker**, which allows investigators to decrypt captured communications and reconstruct attacker behavior.
 
 ---
 
@@ -88,39 +109,21 @@ However, forensic analysis can sometimes recover the **encryption parameters use
 
 Through analysis of the artifacts, the encryption key and initialization vector used by the attacker were recovered.
 
-These parameters allowed the encrypted traffic to be decrypted and inspected.
-
-```
-AES Key and IV
-```
-
 ```
 946cf2f65ac2d2b868328a18dedcc296cc40fa28fab41a0c34dcc010984410ca8cd00c3e349290565aaa5a8c3aacd430
 ```
 
-Recovering these values allowed the attacker communication to be decrypted.
+These values allowed the encrypted communication to be decrypted and analyzed.
 
 ---
 
-### 🔐 Step 5 — Decrypt the Attacker Communication
+### 🔐 Step 5 — Reconstruct the Attacker Activity
 
-Once the encryption parameters were identified, the captured C2 traffic could be decrypted.
+After identifying the encryption parameters, the attacker’s communication could be decrypted.
 
-📸 **Recovered Attacker Output**
+This revealed that the attacker had printed a message containing a flag, confirming that the encrypted traffic contained useful forensic evidence.
 
-<img src="../images/image046.png" width="600">
-
-The decrypted communication revealed that the attacker had printed a message containing a flag.
-
-This confirmed that the encrypted traffic contained valuable forensic evidence.
-
----
-
-### 🔄 Step 6 — Identify the Stolen File
-
-Further investigation revealed that the attacker had accessed an important file during the compromise.
-
-Inspecting the recovered artifacts exposed the final hidden message inside the file accessed by the attacker.
+Further investigation of the artifacts also revealed an additional file accessed by the attacker, which contained the final hidden message.
 
 ---
 
@@ -131,15 +134,15 @@ Evidence archive obtained
       ↓
 Artifacts extracted
       ↓
-Attacker communication identified
+Network traffic analyzed
       ↓
-C2 framework recognized
+C2 framework identified
       ↓
 Encryption parameters recovered
       ↓
-Traffic decrypted
+Attacker communication decrypted
       ↓
-Attacker activity reconstructed
+Incident activity reconstructed
 ```
 
 ---
@@ -149,7 +152,7 @@ Attacker activity reconstructed
 Primary techniques used:
 
 - digital forensic artifact analysis  
-- network traffic investigation  
+- packet capture investigation  
 - command-and-control identification  
 - encrypted traffic analysis  
 - incident reconstruction  
@@ -164,28 +167,28 @@ C2 traffic decryption
 
 ## 🛡 Defensive Insight
 
-Attackers often rely on command-and-control frameworks to maintain persistent access and execute commands remotely.
+Attackers frequently use command-and-control frameworks to maintain persistent access and issue commands to compromised systems.
 
-Even when attacker communication is encrypted, forensic investigations can recover encryption parameters and reconstruct the attacker’s activity.
+Even when attacker communications are encrypted, forensic investigations can sometimes recover encryption parameters and reconstruct the attacker’s actions.
 
 Organizations should implement:
 
-- network monitoring and detection systems  
+- network monitoring and intrusion detection systems  
 - endpoint detection and response (EDR)  
-- traffic anomaly detection  
-- incident response procedures
+- anomaly detection for unusual traffic patterns  
+- strong incident response procedures  
 
-These controls help detect and investigate malicious command-and-control activity.
+These measures help detect and investigate malicious command-and-control activity.
 
 ---
 
 ## 💡 Skills Reinforced
 
 - Digital forensics investigation  
+- Network traffic analysis  
 - C2 framework identification  
-- Encrypted traffic analysis  
+- Encrypted traffic investigation  
 - Incident reconstruction  
-- Threat hunting techniques  
 
 ---
 
