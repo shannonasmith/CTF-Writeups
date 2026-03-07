@@ -1,10 +1,10 @@
 <div align="center">
 
 # 🪟 Unwanted Visitor  
-## Windows Log Analysis & Suspicious Activity Investigation
+## Windows Authentication Log Investigation
 
 ![Category](https://img.shields.io/badge/Category-DFIR-darkred?style=for-the-badge)
-![Focus](https://img.shields.io/badge/Focus-Windows%20Log%20Analysis-blue?style=for-the-badge)
+![Focus](https://img.shields.io/badge/Focus-Windows%20Event%20Logs-blue?style=for-the-badge)
 ![Method](https://img.shields.io/badge/Method-Incident%20Investigation-success?style=for-the-badge)
 
 </div>
@@ -13,11 +13,13 @@
 
 ### 🎯 Objective
 
-Investigate suspicious activity occurring on a Windows system and determine how an unauthorized user gained access and executed malicious actions.
+Investigate suspicious activity on a compromised server using Windows event logs.
 
-The challenge required analyzing Windows artifacts to identify evidence of attacker behavior.
+The investigation focused on identifying the **machine used by the attacker to authenticate to the compromised system**.
 
-This investigation focused on **authentication events, PowerShell execution, and persistence mechanisms**.
+The challenge description suggested that the attacker had obtained **stolen credentials** and accessed the system through a **common remote access protocol**.
+
+The goal was to analyze the available log files and determine the **hostname of the machine used during the attacker login event**.
 
 ---
 
@@ -27,81 +29,107 @@ This investigation focused on **authentication events, PowerShell execution, and
 |-----|------|
 | Kali / Ubuntu Linux VM | Investigation environment |
 | Windows Event Logs | Authentication event analysis |
-| PowerShell Script Block Logs | Command execution tracking |
-| Log inspection tools | Artifact examination |
+| Event Viewer / log viewer | Log inspection |
+| Manual log filtering | Identifying suspicious authentication events |
 
 ---
 
-### 📦 Step 1 — Examine the Security Event Log
+### 📦 Step 1 — Acquire the Challenge Artifacts
 
-The investigation began by reviewing the **Security.evtx** log.
+The challenge provided a compressed archive containing Windows log files.
 
-Windows Security logs record authentication activity and can reveal suspicious login behavior.
+```
+logs.zip
+```
 
-Key events of interest included:
+The archive was downloaded and extracted for investigation.
+
+```bash
+unzip logs.zip
+```
+
+This revealed multiple Windows Event Log files including:
+
+- **Security.evtx**
+- **Operational logs**
+
+Initial hypothesis:
+
+The attacker authentication event would likely appear in the **Security log**, which records login activity.
+
+---
+
+### 🔍 Step 2 — Initial Log Review
+
+The investigation began by examining the **Operational logs** to identify any suspicious activity.
+
+During this review, a string resembling a flag was discovered within the log details.
+
+📸 **Initial False Flag Discovery**
+
+<img src="../images/image31.png" width="800">
+
+The discovered value appeared to match the expected flag format.
+
+However, submitting this value resulted in an incorrect answer.
+
+---
+
+### 🔄 Step 3 — Reevaluate the Investigation
+
+Reexamining the challenge description revealed a critical detail:
+
+```
+Flag format: mne{HOSTNAME} (all upper case)
+```
+
+The previously discovered value did **not match the required format**, indicating it was likely a **decoy or unrelated artifact**.
+
+The provided hint also suggested focusing specifically on:
+
+```
+Security.evtx
+```
+
+This indicated that the correct evidence likely existed within the **Windows Security log**, rather than the Operational logs initially reviewed.
+
+---
+
+### 🧪 Step 4 — Investigate Authentication Events
+
+The Windows **Security.evtx** log records authentication activity.
+
+A key event type for identifying login activity is:
 
 ```
 Event ID 4624 — Successful Logon
 ```
 
-These events identify when a user successfully authenticates to the system.
+These events contain valuable information including:
 
----
+- Account Name
+- Logon Type
+- Source Network Address
+- Workstation Name
 
-### 🔍 Step 2 — Identify Suspicious Authentication Activity
-
-Reviewing Event ID 4624 entries revealed login activity associated with a user account accessing the system.
-
-Important fields examined included:
-
-- **Account Name**
-- **Logon Type**
-- **Workstation Name**
-- **Source Network Address**
-
-These details help determine whether the login originated from a legitimate source.
-
----
-
-### 🧪 Step 3 — Analyze PowerShell Script Block Logs
-
-Further investigation focused on **PowerShell Script Block Logging**, which records commands executed within PowerShell sessions.
-
-Script block logs can reveal attacker activity such as:
-
-- command execution
-- malicious script downloads
-- privilege escalation attempts
-
-One notable indicator identified during analysis was the use of:
+Because the attacker logged into the system remotely, particular attention was given to:
 
 ```
-Invoke-Expression (IEX)
+Logon Type 3  — Network logon
+Logon Type 10 — Remote interactive logon
 ```
 
-This command is commonly used by attackers to execute dynamically downloaded scripts.
+Filtering for **Event ID 4624** allowed identification of successful login attempts during the timeframe of the compromise.
 
 ---
 
-### 🔄 Step 4 — Identify Persistence Mechanism
+### 🔐 Step 5 — Identify the Attacker Hostname
 
-Further log review revealed evidence of **scheduled task creation**.
+Reviewing the authentication events revealed a login entry containing a **Workstation Name** field.
 
-Scheduled tasks are frequently used by attackers to maintain persistence on compromised systems.
+This field identifies the **hostname of the machine used during authentication**.
 
-By creating a scheduled task, attackers can ensure their code executes automatically even after system restarts.
-
-This behavior is consistent with common persistence techniques observed in real-world attacks.
-
----
-
-### 🔐 Step 5 — Detect Obfuscation Techniques
-
-Further analysis revealed that some commands used **ROT13-style obfuscation**.
-
-Obfuscation techniques are commonly used by attackers to avoid detection and make malicious scripts harder to identify during log review.
-
-Decoding the obfuscated content revealed the true intent of the executed commands.
+By examining the details of the relevant Event ID 4624 entry, the attacker workstation hostname was identified.
 
 ---
 
@@ -110,52 +138,61 @@ Decoding the obfuscated content revealed the true intent of the executed command
 ```
 Artifact acquisition
       ↓
-Security event log analysis
+Initial log inspection
       ↓
-Authentication event investigation
+False lead discovery
       ↓
-PowerShell execution review
+Challenge requirement verification
       ↓
-Persistence detection
+Security log analysis
       ↓
-Obfuscation analysis
+Authentication event filtering
+      ↓
+Attacker workstation identification
 ```
 
 ---
 
 ## 🛠 Techniques Used
 
-Primary techniques used:
+Primary investigation techniques:
 
-- Windows event log analysis
-- authentication event tracking
-- PowerShell command investigation
-- persistence mechanism detection
-- script obfuscation analysis
+- Windows event log analysis  
+- authentication event investigation  
+- log filtering and artifact validation  
+- investigation pivoting after false leads  
 
-Key investigation artifacts:
+Key artifact analyzed:
 
 ```
 Security.evtx
-PowerShell Script Block Logs
+```
+
+Important event type:
+
+```
+Event ID 4624 — Successful Logon
 ```
 
 ---
 
 ## 🛡 Defensive Insight
 
-Windows logs provide valuable forensic evidence during incident investigations.
+Windows Security logs provide critical forensic evidence during incident investigations.
 
-Important detection opportunities include:
+Important fields in authentication events include:
 
-- unusual authentication patterns
-- PowerShell command execution
-- scheduled task creation
-- obfuscated command usage
+- **Logon Type** (how the login occurred)
+- **Workstation Name** (source host)
+- **Source Network Address**
 
-Monitoring these indicators can significantly improve an organization's ability to detect malicious activity.
+Monitoring authentication logs can help defenders detect:
 
-Script block logging in particular provides **high-fidelity visibility into attacker behavior**.
+- stolen credential usage
+- lateral movement
+- suspicious remote logins
+
+Proper log analysis enables defenders to **trace attacker activity back to its origin system**.
 
 ---
 
@@ -163,9 +200,8 @@ Script block logging in particular provides **high-fidelity visibility into atta
 
 - Windows event log investigation  
 - Authentication event analysis  
-- PowerShell command inspection  
-- Persistence detection techniques  
-- Obfuscation identification  
+- Log filtering techniques  
+- Investigation pivoting after false leads  
 - Incident response methodology  
 
 ---
@@ -173,7 +209,7 @@ Script block logging in particular provides **high-fidelity visibility into atta
 <div align="center">
 
 🪟 Logs reveal attacker behavior  
-🔍 Authentication events tell the story  
-🛡 Detection begins with investigation  
+🔍 Investigations require verification  
+🧠 False leads are part of the process  
 
 </div>
