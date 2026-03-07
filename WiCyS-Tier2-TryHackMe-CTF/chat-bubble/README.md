@@ -70,7 +70,7 @@ Opening the renamed file revealed the first portion of the hidden message.
 
 📸 **PDF Interpretation of the File**
 
-<img src="../images/image036_redacted.png" width="600">
+<img src="../images/image036_redacted.png" width="300">
 
 This confirmed that the file could be interpreted successfully as a PDF, proving that it contained valid data for more than one file format.
 
