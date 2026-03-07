@@ -161,23 +161,15 @@ Writeups focus strictly on **process, analysis, and investigative methodology.**
 
 ---
 
-## 👤 Author
-
-**Shannon Smith**  
-Cybersecurity | DFIR • Web Security • Threat Analysis  
-U.S. Navy Veteran  
-
-🎓 Virginia Tech — M.S. Information Technology  
-📜 CEH | Security+ | Linux+ | Splunk CCPU | GFACT  
-
----
-
 <div align="center">
 
-⭐ Documenting investigation methodology  
-🔎 Improving detection signal  
-🛡 Thinking like a security analyst  
+## 👤 Shannon Smith  
+Cybersecurity | DFIR • Web Security • Threat Analysis  
+U.S. Navy Veteran | Virginia Tech — M.S. Information Technology  
+GIAC GFACT | CEH | Security+ | Linux+ | Splunk CCPU  
 
-</div>
+🛡️ Thinking like an analyst  
+🔎 Documenting investigations  
+📈 Building repeatable security workflows  
 
 </div>
