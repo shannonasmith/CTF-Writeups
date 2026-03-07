@@ -1,19 +1,24 @@
 <div align="center">
 
-# 🧠 CTF Writeups — Cybersecurity Investigation Portfolio
+# 🧠 CTF Writeups
 
-Hands-on cybersecurity investigations across **web exploitation, DFIR, cryptography, network analysis, threat hunting, and system forensics**.
+### Cybersecurity Investigation Portfolio
+
+Hands-on cybersecurity investigations across  
+**Web Exploitation • DFIR • Cryptography • Network Analysis • Threat Hunting • System Forensics**
 
 <br>
 
-<img src="images/cyber-study.png" width="110"/>
-<img src="images/wicys-tier1.png" width="110"/>
-<img src="images/wicys-attendee.png" width="110"/>
-<img src="images/wicys-tier2.png" width="110"/>
-<img src="images/ncl-ctf.png" width="110"/>
-<img src="images/wicys-tier3.png" width="110"/>
-<img src="images/gfact.png" width="110"/>
+<img src="images/cyber-study.png" width="220"/>
 
+<br><br>
+
+<img src="images/gfact.png" width="95"/>
+<img src="images/wicys-tier1.png" width="95"/>
+<img src="images/wicys-tier2.png" width="95"/>
+<img src="images/wicys-tier3.png" width="95"/>
+<img src="images/wicys-attendee.png" width="95"/>
+<img src="images/ncl-ctf.png" width="95"/>
 
 <br><br>
 
