@@ -34,74 +34,80 @@ The goal was to perform **open-source intelligence (OSINT) techniques and artifa
 
 ### 📦 Step 1 — Obtain the Artifact
 
-The investigation began by downloading the file provided in the challenge.
+The investigation began by downloading the artifact provided in the challenge.
 
-The artifact appeared to be a normal file at first glance and did not visibly contain any sensitive information.
+At first glance, the file appeared normal and did not visibly expose any useful information.
 
-Because OSINT challenges often involve hidden metadata or embedded data, the next step was to inspect the file more closely.
+Because OSINT challenges frequently hide clues within file structures or metadata, the next step was to perform deeper artifact inspection.
 
 ---
 
-### 🔍 Step 2 — Inspect the File for Hidden Information
+### 🔍 Step 2 — Inspect the File Structure
 
-The file was examined for metadata, embedded text, or hidden structures that might reveal additional information.
+The artifact was examined to determine whether it contained hidden data or metadata fields.
 
-Common OSINT artifact inspection techniques include:
+📸 **Artifact Inspection**
 
-- checking file metadata  
-- examining embedded text strings  
-- reviewing file structure for hidden content  
+<img src="../images/image027.png" width="600">
 
-These techniques often reveal data that is not immediately visible when the file is opened normally.
+Initial inspection revealed that the file contained additional embedded data beyond what was visible through standard viewing.
 
 ---
 
 ### 🧪 Step 3 — Analyze Embedded Data
 
-Further inspection of the artifact revealed hidden information embedded within the file.
+Further investigation focused on analyzing any hidden information contained within the artifact.
 
-This confirmed that the artifact contained data beyond what was visible through standard viewing methods.
+📸 **Embedded Data Analysis**
 
-OSINT investigations frequently uncover hidden clues by analyzing files for:
+<img src="../images/image028.png" width="600">
 
-- metadata fields  
-- embedded comments  
-- hidden text strings  
+This stage involved examining the file contents for:
+
+- hidden text
+- metadata entries
+- embedded clues
+
+These techniques often reveal information unintentionally left inside files.
 
 ---
 
 #### 🔎 Analytical Observation
 
-Digital files frequently contain hidden metadata that can reveal sensitive information.
+Many digital files contain metadata that may expose sensitive information.
 
 Examples include:
 
 - author names  
-- creation timestamps  
-- application identifiers  
-- hidden embedded content  
+- file creation timestamps  
+- embedded application identifiers  
+- hidden comments or text fields  
 
-Investigators often rely on metadata analysis to uncover information that users did not intend to expose.
-
----
-
-### 🔄 Step 4 — Identify the Hidden Message
-
-After analyzing the embedded data within the artifact, the hidden information required to complete the challenge was identified.
-
-This confirmed that the artifact contained concealed data that could only be discovered through careful inspection.
+OSINT investigators frequently analyze file metadata to uncover clues that were not meant to be publicly visible.
 
 ---
 
-### 🔐 Step 5 — Confirm Artifact Data Discovery
+### 🔄 Step 4 — Identify the Hidden Clue
 
-The hidden information was successfully recovered from the artifact.
+By analyzing the embedded data within the artifact, a clue relevant to the challenge objective was discovered.
+
+📸 **Hidden Artifact Clue**
+
+<img src="../images/image029.png" width="600">
+
+This discovery confirmed that the artifact contained concealed information that could only be revealed through deeper inspection.
+
+---
+
+### 🔐 Step 5 — Confirm Successful Data Recovery
+
+After following the investigative trail contained within the artifact, the hidden information required to complete the challenge was successfully recovered.
 
 📸 **Recovered Hidden Data**
 
-<img src="../images/image028_redacted.png" width="600">
+<img src="../images/image030_redacted.png" width="600">
 
-This demonstrated how artifact inspection and OSINT techniques can reveal information that is not visible through normal file viewing.
+This demonstrated how artifact inspection and OSINT techniques can uncover sensitive information that is not visible during normal file viewing.
 
 ---
 
@@ -114,7 +120,7 @@ Initial file inspection
       ↓
 Metadata and embedded data analysis
       ↓
-Hidden information discovered
+Hidden clue discovery
       ↓
 Artifact investigation completed
 ```
@@ -140,15 +146,15 @@ File metadata analysis
 
 ## 🛡 Defensive Insight
 
-Digital artifacts frequently contain hidden metadata that can expose sensitive information unintentionally.
+Digital artifacts frequently contain hidden metadata that can unintentionally expose sensitive information.
 
-Organizations should sanitize files before distribution to remove metadata that may reveal internal information.
+Organizations should sanitize files before distributing them publicly to remove metadata that could reveal internal details.
 
 Recommended practices include:
 
-- metadata stripping before publishing files  
-- secure document handling procedures  
-- awareness of embedded file metadata  
+- metadata stripping before publishing documents  
+- secure handling of shared artifacts  
+- awareness of hidden file metadata  
 
 Proper artifact management helps prevent unintended information disclosure.
 
