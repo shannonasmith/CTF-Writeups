@@ -13,11 +13,11 @@
 
 ### 🎯 Objective
 
-Analyze a series of documents that appeared to have sensitive information removed through redaction.
+Analyze a set of documents that appear to have sensitive information removed through redaction.
 
-The challenge title suggested that the redactions might have been applied **improperly**, meaning the underlying data could still be recovered through forensic inspection.
+The challenge title suggested that the redactions may have been applied incorrectly, meaning the hidden information might still exist within the file structure.
 
-This was fundamentally a **digital artifact analysis and redaction bypass problem**.
+This challenge focused on **digital artifact inspection and improper redaction discovery**.
 
 ---
 
@@ -27,74 +27,72 @@ This was fundamentally a **digital artifact analysis and redaction bypass proble
 |-----|------|
 | Kali / Ubuntu Linux VM | Investigation environment |
 | Document viewers | File inspection |
-| Metadata inspection tools | Artifact analysis |
-| Manual file review | Identifying hidden content |
+| Manual artifact inspection | Identifying hidden document structure |
+| Text selection testing | Determining whether underlying data remained |
 
 ---
 
-### 📦 Step 1 — Obtain the Artifact
+### 📦 Step 1 — Obtain the Artifacts
 
-The challenge provided documents that appeared to contain redacted content.
+The challenge provided several documents containing redacted sections.
 
-At first glance, the documents displayed blacked-out sections intended to conceal sensitive information.
+At first glance, the files displayed blacked-out text intended to conceal sensitive information.
 
 Initial hypothesis:
 
-The redactions may have been applied **visually rather than structurally**, meaning the hidden content could still exist within the file.
+The redactions may have been applied **visually rather than structurally**, meaning the original data could still exist within the file.
 
 ---
 
-### 🔍 Step 2 — Inspect the Document
+### 🔍 Step 2 — Inspect the Redacted Documents
 
-The document was opened using a standard viewer to observe the redacted sections.
+Each document was opened and inspected visually.
 
-📸 **Redacted Document View**
+📸 **Redacted Document Example**
+
+<img src="../images/image26.png" width="800">
+
+The redacted sections appeared as black rectangles covering text.
+
+However, visual redactions do not always remove the underlying content.
+
+---
+
+### 🧪 Step 3 — Examine Additional Redacted Artifacts
+
+Multiple documents were provided, each showing similar redaction behavior.
+
+📸 **Additional Redacted Document**
+
+<img src="../images/image27.png" width="800">
+
+The consistent redaction style suggested that the same method had been used across multiple files.
+
+This increased the likelihood that the redaction process had been applied incorrectly.
+
+---
+
+### 🔄 Step 4 — Analyze Redaction Technique
+
+Improper redaction often occurs when:
+
+- black shapes are placed over text
+- the original text layer remains underneath
+- the document is exported without removing the underlying data
+
+📸 **Redacted Artifact Structure**
 
 <img src="../images/image28.png" width="800">
 
-The redactions appeared as black rectangles covering text.
-
-However, visual redactions do not always remove the underlying content from the document structure.
+This indicated that the sensitive content may still exist in the document structure despite being visually hidden.
 
 ---
 
-### 🧪 Step 3 — Attempt Content Selection
+### 🔐 Step 5 — Identify Improper Redaction
 
-One common mistake in document redaction is **overlaying shapes on top of text rather than removing the text itself**.
+Through artifact inspection and testing, it became clear that the redactions had not permanently removed the sensitive information.
 
-Testing this hypothesis involved attempting to:
-
-- highlight text near the redacted region
-- copy and paste surrounding content
-- inspect whether hidden characters were still selectable
-
-In many improperly redacted documents, the text remains embedded in the file and can be recovered.
-
----
-
-### 🔄 Step 4 — Inspect Document Structure
-
-Further inspection focused on whether the redactions were implemented as **graphical overlays rather than actual data removal**.
-
-If the redaction objects are simply shapes placed over text, removing or bypassing those shapes can expose the hidden content.
-
-📸 **Redaction Layer Investigation**
-
-<img src="../images/image29_redacted.png" width="800">
-
-This confirmed that the redacted content was still present within the document structure.
-
----
-
-### 🔐 Step 5 — Reveal Hidden Content
-
-By analyzing how the redaction layer was applied, the concealed information could be revealed.
-
-📸 **Recovered Content**
-
-<img src="../images/image30_redacted.png" width="800">
-
-This demonstrated that the document’s redaction process failed to properly remove sensitive data.
+Instead, the redacted areas were likely implemented as **visual overlays**, meaning the underlying content could potentially be recovered through further analysis.
 
 ---
 
@@ -103,15 +101,13 @@ This demonstrated that the document’s redaction process failed to properly rem
 ```
 Artifact acquisition
       ↓
-Document inspection
+Visual document inspection
       ↓
-Redaction behavior testing
-      ↓
-Document structure analysis
+Redaction pattern analysis
       ↓
 Overlay identification
       ↓
-Hidden content exposure
+Improper redaction discovery
 ```
 
 ---
@@ -120,34 +116,34 @@ Hidden content exposure
 
 Primary techniques used:
 
-- document inspection
+- document artifact inspection
 - visual redaction analysis
-- text selection testing
-- artifact structure evaluation
+- layered document behavior analysis
+- information disclosure investigation
 
 Key concept investigated:
 
 ```
-Improper redaction
+Improper document redaction
 ```
 
 ---
 
 ## 🛡 Defensive Insight
 
-Improper document redaction is a common security mistake.
+Improper redaction is a common data protection failure.
 
-Many users believe that covering text with shapes or highlighting over content removes the underlying data.
+Simply covering text with shapes or black boxes does not remove the original content from the document.
 
-However, this often leaves the original text intact within the document.
+If the text layer remains intact, attackers may recover the hidden information.
 
-Secure redaction should involve:
+Proper redaction requires:
 
 - permanently removing sensitive text
 - flattening document layers
-- verifying that hidden content cannot be recovered
+- verifying that underlying content cannot be extracted
 
-Failure to apply proper redaction techniques can expose sensitive information even when it appears visually hidden.
+Organizations that rely on visual redaction alone risk exposing sensitive information.
 
 ---
 
@@ -155,16 +151,16 @@ Failure to apply proper redaction techniques can expose sensitive information ev
 
 - Digital artifact inspection  
 - Document structure analysis  
-- Redaction bypass techniques  
-- Information disclosure identification  
+- Redaction bypass investigation  
+- Information disclosure analysis  
 - Secure document handling awareness  
 
 ---
 
 <div align="center">
 
-🕵️ Visual redaction does not equal data removal  
-🔍 Inspect the underlying artifact structure  
-🧠 Hidden data often remains recoverable  
+🕵️ Visual redaction does not remove data  
+🔍 Inspect artifacts beyond the visible layer  
+🧠 Hidden information often remains recoverable  
 
 </div>
