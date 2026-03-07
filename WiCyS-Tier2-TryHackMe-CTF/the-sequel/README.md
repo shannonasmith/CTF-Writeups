@@ -1,127 +1,187 @@
 <div align="center">
 
-# 💉 The Sequel  
-## SQL Injection & Database Query Manipulation
+# 🧬 The Sequel  
+## SQL Injection & Database Enumeration Investigation
 
 ![Category](https://img.shields.io/badge/Category-Web%20Security-orange?style=for-the-badge)
 ![Focus](https://img.shields.io/badge/Focus-SQL%20Injection-blue?style=for-the-badge)
-![Method](https://img.shields.io/badge/Method-Input%20Manipulation-success?style=for-the-badge)
+![Method](https://img.shields.io/badge/Method-Query%20Manipulation-success?style=for-the-badge)
 
 </div>
 
 ---
 
-## 🎯 Objective
+### 🎯 Objective
 
-Investigate a web application that accepts user input and determine whether it improperly interacts with a backend database.
+Investigate a web application suspected of being vulnerable to **SQL injection** due to improper handling of user-supplied input.
 
-The challenge required analyzing how user-supplied data was processed and identifying whether the application was vulnerable to **SQL injection attacks**.
+The challenge description hinted that the application did not properly sanitize database queries.
 
-The goal was to manipulate the application's database query logic in order to bypass normal restrictions.
-
----
-
-## 🖥 Environment
-
-- Web browser  
-- Browser developer tools  
-- Manual input testing  
-- SQL injection payload experimentation  
+The objective was to determine whether database queries could be manipulated to extract internal information from the backend database.
 
 ---
 
-## 🔍 Step 1 — Analyze Application Input Fields
+### 🖥 Environment
 
-The investigation began by interacting with the application's input fields.
-
-Initial testing focused on:
-
-- Observing how user input was processed  
-- Determining whether errors occurred when special characters were used  
-- Identifying how the application responded to unexpected input  
-
-Web applications that directly incorporate user input into database queries are often vulnerable to injection attacks.
+| Tool | Purpose |
+|-----|------|
+| Web browser | Application interaction |
+| Kali Linux AttackBox | Testing environment |
+| Browser input fields | Injection testing |
+| SQL query manipulation | Database enumeration |
 
 ---
 
-## 🔎 Step 2 — Test for Injection Behavior
+### 📦 Step 1 — Access the Target Application
 
-Input fields were tested using characters commonly associated with SQL syntax, including:
+After launching the challenge machine, the web application was accessed through the provided address.
 
-- quotation marks
-- logical operators
-- comment characters
+```
+http://10.10.x.x:3000
+```
 
-The application's responses indicated that user input was being incorporated into a backend query without proper sanitization.
+The application contained multiple pages including a **billing section** that appeared to interact with backend database records.
 
-This suggested that the application was vulnerable to **SQL query manipulation**.
+📸 **Application Billing Interface**
 
----
+<img src="../images/image014.png" width="600">
 
-## 🔄 Step 3 — Manipulate Query Logic
-
-By carefully modifying the structure of the input, it became possible to alter the logic of the underlying SQL query.
-
-Instead of returning results based strictly on the intended query conditions, the manipulated input caused the database to evaluate a different logical expression.
-
-This allowed the application to return results that would normally be restricted.
+Because this page retrieved database information dynamically, it became the primary candidate for SQL injection testing.
 
 ---
 
-## 🔐 Step 4 — Confirm Database Manipulation
+### 🔍 Step 2 — Test Basic SQL Injection
 
-Further testing confirmed that the input was successfully influencing the database query.
+To determine whether the application was vulnerable to SQL injection, a simple query manipulation payload was inserted into the input field.
 
-This demonstrated that:
+```
+1 UNION SELECT 1,2,3
+```
 
-- Input validation was insufficient
-- Queries were likely constructed dynamically
-- The database logic could be altered through crafted input
+📸 **Initial Injection Test**
 
-This confirmed the presence of a **classic SQL injection vulnerability**.
+<img src="../images/image015.png" width="600">
 
----
+The server returned a modified response, confirming that user input was being inserted directly into the backend SQL query.
 
-# 🧠 Methodology Framework Applied
-
-1. Identify application input points  
-2. Test special character handling  
-3. Observe application response patterns  
-4. Introduce structured query manipulation input  
-5. Evaluate altered database behavior  
-6. Confirm injection vulnerability  
+This behavior confirmed the presence of a **SQL injection vulnerability**.
 
 ---
 
-# 🛡 Defensive Insight
+### 🧪 Step 3 — Enumerate Database Tables
 
-SQL injection vulnerabilities occur when user input is incorporated into database queries without proper sanitization or parameterization.
+Once SQL injection was confirmed, the next step was to identify the database structure.
 
-Secure application design should include:
+A query was crafted to retrieve table names from the database metadata:
 
-- Parameterized queries  
-- Prepared statements  
-- Strict input validation  
-- Database query separation from user input  
+```sql
+1 UNION SELECT 1,table_name,3 FROM information_schema.tables
+```
 
-Failure to implement these protections allows attackers to manipulate database queries and retrieve unauthorized data.
+📸 **Database Table Enumeration**
+
+<img src="../images/image016.png" width="600">
+
+This query returned information about the database tables, allowing the investigation to identify potential targets containing sensitive data.
 
 ---
 
-# 💡 Skills Reinforced
+### 🔄 Step 4 — Identify Table Columns
+
+After locating a table of interest, the next step was to enumerate the column names within that table.
+
+The following query retrieved column information from the database schema:
+
+```sql
+1 UNION SELECT 1,GROUP_CONCAT(column_name),3 
+FROM information_schema.columns 
+WHERE table_name='flag'
+```
+
+📸 **Column Enumeration**
+
+<img src="../images/image017.png" width="600">
+
+This step revealed the structure of the table storing the protected data.
+
+---
+
+### 🔐 Step 5 — Retrieve Sensitive Data
+
+Once the table structure was understood, the query was adjusted to retrieve the stored information from the identified column.
+
+📸 **Database Data Retrieval**
+
+<img src="../images/image018_redacted.png" width="600">
+
+The application returned the contents of the protected field, confirming that the SQL injection vulnerability allowed **direct extraction of backend database data**.
+
+---
+
+## 🧠 Methodology Framework Applied
+
+```
+Web application access
+      ↓
+Input field testing
+      ↓
+SQL injection confirmation
+      ↓
+Database table enumeration
+      ↓
+Column structure discovery
+      ↓
+Sensitive data extraction
+```
+
+---
+
+## 🛠 Techniques Used
+
+Primary techniques used:
+
+- SQL injection testing  
+- UNION query manipulation  
+- database schema enumeration  
+- metadata extraction using `information_schema`  
+
+Key concept investigated:
+
+```
+SQL Injection
+```
+
+---
+
+## 🛡 Defensive Insight
+
+SQL injection vulnerabilities occur when applications construct database queries using unsanitized user input.
+
+Secure development practices include:
+
+- parameterized queries  
+- prepared statements  
+- input validation and sanitization  
+- restricting database permissions  
+
+Proper query handling prevents attackers from manipulating database commands and extracting sensitive information.
+
+---
+
+## 💡 Skills Reinforced
 
 - Web application vulnerability testing  
-- SQL injection detection techniques  
-- Database query logic analysis  
-- Input validation assessment  
-- Application response pattern analysis  
+- SQL injection identification  
+- Database enumeration techniques  
+- Query manipulation and schema discovery  
+- Secure database interaction awareness  
 
 ---
 
 <div align="center">
 
-💉 User input should never control database queries  
-🔎 Observe how applications interpret unexpected input  
-🧠 Secure applications separate logic from data  
+🧬 Test how applications build database queries  
+🔍 Enumerate database structure methodically  
+🔐 SQL injection can expose entire databases  
 
 </div>
